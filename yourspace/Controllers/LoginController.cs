@@ -20,7 +20,7 @@ namespace yourspace.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Validate(string password, string email)
+        public ActionResult CheckLogin(string password, string email)
         {
             var _acc = db.Account.Where(s => s.Email == email);
             if (_acc.Any())
@@ -28,22 +28,22 @@ namespace yourspace.Controllers
                 if (_acc.Where(s => s.HashedPass == getMD5(password + s.SaltValue)).Any())
                 {
 
-                    return Json(new { status = true, message = "Login Successfull!" });
+                    return RedirectToAction("Index","Home");
                 }
                 else
                 {
-                    return Json(new { status = false, message = "Invalid Password!" });
+                    return View();
                 }
             }
             else
             {
-                return Json(new { status = false, message = "Invalid Email!" });
+                return View();
             }
 
 
         }
 
-        static string getMD5(string saltyPass)
+        string getMD5(string saltyPass)
         {
             string hash;
             using(MD5 md5Hash = MD5.Create())
