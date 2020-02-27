@@ -16,7 +16,8 @@ namespace yourspace
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
-                defaults: new { controller = "Login", action = "Index", id = UrlParameter.Optional }
+                defaults: new { controller = "SignUp", action = "Index", id = UrlParameter.Optional }
+           
             );
         }
     }
