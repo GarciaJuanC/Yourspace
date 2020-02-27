@@ -15,8 +15,11 @@
 			<div>
 				<input type="email" placeholder="Email" name="email" required />
 				<input type="password" placeholder="Password" name="password" required />
-				<input type="submit" onclick="location.href='<%: Url.Action("CheckLogin", "LoginController") %>'"  value="Log in" />
+				<input type="submit" onclick="location.href='@Url.Action("CheckLogin", "Login")'" value="Log in" />
 			</div>	
+			<div>
+				<a href="~/SignUp/Index">Dont have an account? Sign up here</a>
+			</div>
 		</form>
 	</section><!-- content -->
 </div><!-- container -->
