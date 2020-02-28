@@ -6,19 +6,28 @@
 <html lang="en">
  <!--<![endif]-->
 <head>
+    <style>
+        h2 {
+            color: black;
+            margin: 5px;
+            text-align: center;
+        }
+    </style>
 
-    <title>Sign Up to YourSpace!</title>
+
+    <title>Sign Up Page</title>
 </head>
 <body>
     <div class="container">
         <section id="content">
             <form action="">
                 <h2>Sign Up to YourSpace!</h2>
+                <label for="fname">First Name:</label><br>
+                <input type="text" id="firstname" name="firstname" required><br>
+                <label for="lname">Last Name:</label><br>
+                <input type="text" id="lastname" name="lastname" required><br>
+                <input type="submit" />
 
-                <label for="fname">username:</label><br>
-                <input type="text" id="username" name="username"><br>
-                <label for="lname">password:</label><br>
-                <input type="text" id="password" name="password">
             </form>
 
         </section><!-- content -->
