@@ -1,10 +1,28 @@
-﻿<!DOCTYPE html>
+﻿@{
+    var firstName = "";
+    var lastName = "";
+
+    if (IsPost)
+    {
+        firstName = Request.Form["firstName"];
+        lastName = Request.Form["lastName"];
+
+        var db = Database.Open();
+        var insertCommand = "INSERT INTO ";
+
+    }
+}
+
+
+
+<!DOCTYPE html>
 <!--[if lt IE 7 ]> <html lang="en" class="ie6 ielt8"> <![endif]-->
 <!--[if IE 7 ]>    <html lang="en" class="ie7 ielt8"> <![endif]-->
 <!--[if IE 8 ]>    <html lang="en" class="ie8"> <![endif]-->
-<!--[if (gte IE 9)|!(IE)]><!-->
+<!-- https://docs.microsoft.com/en-us/aspnet/web-pages/overview/getting-started/introducing-aspnet-web-pages-2/entering-data> <!-->
+
 <html lang="en">
- <!--<![endif]-->
+<!--<![endif]-->
 <head>
     <style>
         h2 {
@@ -13,20 +31,19 @@
             text-align: center;
         }
     </style>
-
-
     <title>Sign Up Page</title>
 </head>
 <body>
     <div class="container">
         <section id="content">
-            <form action="">
+            <form method="post">
                 <h2>Sign Up to YourSpace!</h2>
-                <label for="fname">First Name:</label><br>
-                <input type="text" id="firstname" name="firstname" required><br>
-                <label for="lname">Last Name:</label><br>
-                <input type="text" id="lastname" name="lastname" required><br>
-                <input type="submit" />
+                <label for="firstName">First Name:</label><br>
+                <input type="text" id="firstName" name="firstName" required><br>
+                <label for="lastName">Last Name:</label><br>
+                <input type="text" id="lastName" name="lastName" required><br>
+                <br />
+                <input type="submit" value="Register" />
 
             </form>
 
@@ -34,5 +51,3 @@
     </div><!-- container -->
 </body>
 </html>
-
-

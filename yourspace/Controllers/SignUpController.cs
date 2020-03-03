@@ -9,8 +9,9 @@ using System.Text;
 
 namespace yourspace.Controllers
 {
-    public class SignUpController : Controller
-    {
+    public class SignUpController : Controller {
+        public ashenContext db = new ashenContext();
+    
         public ActionResult Index()
         {
             return View();
