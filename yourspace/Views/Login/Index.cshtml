@@ -15,29 +15,43 @@
 <body>
 	<div class="container">
 		<section id="content">
-				<h1>Login Form</h1>
+			<h1>Login Form</h1>
+		<hr />
+					
+			<div>
+
+				@using (Html.BeginForm("CheckLogin", "Login", FormMethod.Post))
+				{
+					@Html.AntiForgeryToken()
+					@Html.ValidationSummary(true)
+
 				<div>
-			
-					@using (Html.BeginForm("CheckLogin", "Login", FormMethod.Post))
-					{
-						@Html.AntiForgeryToken()
-						@Html.ValidationSummary(true)
-
-						<span>Enter Your Email:</span> @Html.TextBoxFor(m => m.Email)<br />
-						<span>Enter Your Password: </span> @Html.PasswordFor(m => m.Password)<br />
-
-						<input type="submit" value="Log in" />
-					}
-
+					@Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", placeholder = "Email" } })
+					@Html.ValidationMessageFor(model => model.Email)
 				</div>
+
 				<div>
-					<a href="~/SignUp/Index">Dont have an account? Sign up here</a>
+
+					@Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control", placeholder = "Password" } })
+					@Html.ValidationMessageFor(model => model.Password)
 				</div>
-				<strong>User Email: </strong> @Html.DisplayFor(m => m.Email)<br />
-				<strong>User Password: </strong> @Html.DisplayFor(m => m.Password)<br />
+
+					<input class="btn btn-default" type="submit" value="Log in" />
+				}
+
+			</div>
+			<div>
+				Dont have an account?<a href="~/SignUp/Index"> Sign up here</a>
+			</div>
 		</section><!-- content -->
 	</div><!-- container -->
+
 </body>
 </html>
+@section Scripts{
+	<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+	<script src="~/Scripts/jquery.validate.min.js"></script>
+	<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+}
 
 

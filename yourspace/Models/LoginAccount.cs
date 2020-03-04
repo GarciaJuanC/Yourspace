@@ -13,6 +13,7 @@ namespace yourspace.Models
         public string Email { get; set; }
 
         [Display(Name = "Password")]
+        [DataType(DataType.Password)]
         [Required(AllowEmptyStrings = false, ErrorMessage = "Password required")]
         public string Password { get; set; }
 
