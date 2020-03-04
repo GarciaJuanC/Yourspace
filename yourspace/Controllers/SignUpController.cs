@@ -23,6 +23,17 @@ namespace yourspace.Controllers
         public ActionResult create(SignUp signup)
         {
             Account acc = new Account();
+            UserAccount uAcc = new UserAccount();
+
+            acc.Email = signup.Email;
+            acc.HashedPass = signup.Password;
+            uAcc.FirstName = signup.lName;
+            uAcc.MiddleName = signup.mName;
+            uAcc.LastName = signup.lName;
+            uAcc.DateOfBirth = signup.dob;
+            uAcc.PhoneNumber = signup.phoneNum;
+
+
 
         }
 

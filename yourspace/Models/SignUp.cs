@@ -31,7 +31,7 @@ namespace yourspace.Models
 
         [Display(Name = "Birth date")]
         [Required(AllowEmptyStrings = true)]
-        public string dob { get; set; }
+        public DateTime? dob { get; set; }
 
         [Display(Name = "Phone Number")]
         [Required(AllowEmptyStrings = true)]
