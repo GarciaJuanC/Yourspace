@@ -7,9 +7,10 @@
         firstName = Request.Form["firstName"];
         lastName = Request.Form["lastName"];
 
-        var db = Database.Open();
-        var insertCommand = "INSERT INTO ";
-
+        var db = Database.Open("Account");
+        var insertCommand = "INSERT INTO UserAccount (firstName, lastName) VALUES(@0, @1)";
+        db.Execute(insertCommand, firstName, lastName);
+        Response.Redirect("~/Login");
     }
 }
 
@@ -19,7 +20,7 @@
 <!--[if lt IE 7 ]> <html lang="en" class="ie6 ielt8"> <![endif]-->
 <!--[if IE 7 ]>    <html lang="en" class="ie7 ielt8"> <![endif]-->
 <!--[if IE 8 ]>    <html lang="en" class="ie8"> <![endif]-->
-<!-- https://docs.microsoft.com/en-us/aspnet/web-pages/overview/getting-started/introducing-aspnet-web-pages-2/entering-data> <!-->
+<!-- https://docs.microsoft.com/en-us/aspnet/web-pages/overview/getting-started/introducing-aspnet-web-pages-2/entering-data <!-->
 
 <html lang="en">
 <!--<![endif]-->

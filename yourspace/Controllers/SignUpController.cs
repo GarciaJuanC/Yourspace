@@ -9,12 +9,23 @@ using System.Text;
 
 namespace yourspace.Controllers
 {
-    public class SignUpController : Controller {
-        public ashenContext db = new ashenContext();
     
+
+    public class SignUpController : Controller
+    {
+        public ashenContext db = new ashenContext();
+
         public ActionResult Index()
         {
             return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult create(SignUp signup)
+        {
+            Account acc = new Account();
+
         }
 
     }

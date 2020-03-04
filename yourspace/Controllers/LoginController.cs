@@ -18,32 +18,36 @@ namespace yourspace.Controllers
             return View();
         }
 
+        public ActionResult CheckLogin()
+        {
+            return RedirectToAction("Index", "Home");
+        }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Validate(string password, string email)
+        public ActionResult CheckLogin(LoginAccount logAcc)
         {
-            var _acc = db.Account.Where(s => s.Email == email);
-            if (_acc.Any())
+            var _acc = db.Account.Where(s => s.Email == logAcc.Email).FirstOrDefault();
+            if (_acc != null)
             {
-                if (_acc.Where(s => s.HashedPass == getMD5(password + s.SaltValue)).Any())
+                if (_acc.HashedPass == getMD5(logAcc.Password + _acc.SaltValue))
                 {
 
-                    return Json(new { status = true, message = "Login Successfull!" });
+                    return RedirectToAction("Index", "Home");
                 }
                 else
                 {
-                    return Json(new { status = false, message = "Invalid Password!" });
+                    return View();
                 }
             }
             else
             {
-                return Json(new { status = false, message = "Invalid Email!" });
+                return View();
             }
-
 
         }
 
-        static string getMD5(string saltyPass)
+        string getMD5(string saltyPass)
         {
             string hash;
             using(MD5 md5Hash = MD5.Create())

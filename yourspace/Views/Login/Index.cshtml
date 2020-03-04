@@ -1,27 +1,56 @@
-﻿<!DOCTYPE html>
+﻿@using yourspace.Models
+@model LoginAccount
+
+<!DOCTYPE html>
 <!--[if lt IE 7 ]> <html lang="en" class="ie6 ielt8"> <![endif]-->
 <!--[if IE 7 ]>    <html lang="en" class="ie7 ielt8"> <![endif]-->
 <!--[if IE 8 ]>    <html lang="en" class="ie8"> <![endif]-->
-<!--[if (gte IE 9)|!(IE)]><!--> <html lang="en"> <!--<![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!-->
+<html lang="en">
+<!--<![endif]-->
 <head>
 
-<title>Login Page</title>
+	<title>Login Page</title>
 </head>
 <body>
-<div class="container">
-	<section id="content">
-		<form action="">
+	<div class="container">
+		<section id="content">
 			<h1>Login Form</h1>
+		<hr />
+					
+			<div>
+				@using (Html.BeginForm("CheckLogin", "Login", FormMethod.Post))
+				{
+					@Html.AntiForgeryToken()
+					@Html.ValidationSummary(true)
 
-			<label for="fname">username:</label><br>
-			<input type="text" id="username" name="username"><br>
-			<label for="lname">password:</label><br>
-			<input type="text" id="password" name="password">
-		</form>
+				<div>
+					@Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", placeholder = "Email" } })
+					@Html.ValidationMessageFor(model => model.Email)
+				</div>
 
-	</section><!-- content -->
-</div><!-- container -->
+				<div>
+
+					@Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control", placeholder = "Password" } })
+					@Html.ValidationMessageFor(model => model.Password)
+				</div>
+
+					<input class="btn btn-default" type="submit" value="Log in" />
+				}
+
+			</div>
+			<div>
+				Dont have an account?<a href="~/SignUp/Index"> Sign up here</a>
+			</div>
+		</section><!-- content -->
+	</div><!-- container -->
+
 </body>
 </html>
+@section Scripts{
+	<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+	<script src="~/Scripts/jquery.validate.min.js"></script>
+	<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+}
 
 
