@@ -18,17 +18,22 @@ namespace yourspace.Controllers
             return View();
         }
 
+        public ActionResult CheckLogin()
+        {
+            return RedirectToAction("Index", "Home");
+        }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult CheckLogin(string password, string email)
+        public ActionResult CheckLogin(LoginAccount logAcc)
         {
-            var _acc = db.Account.Where(s => s.Email == email);
-            if (_acc.Any())
+            var _acc = db.Account.Where(s => s.Email == logAcc.Email).FirstOrDefault();
+            if (_acc != null)
             {
-                if (_acc.Where(s => s.HashedPass == getMD5(password + s.SaltValue)).Any())
+                if (_acc.HashedPass == getMD5(logAcc.Password + _acc.SaltValue))
                 {
 
-                    return RedirectToAction("Index","Home");
+                    return RedirectToAction("Index", "Home");
                 }
                 else
                 {
@@ -39,7 +44,6 @@ namespace yourspace.Controllers
             {
                 return View();
             }
-
 
         }
 
