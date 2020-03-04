@@ -1,22 +1,4 @@
-﻿@{
-    var firstName = "";
-    var lastName = "";
-
-    if (IsPost)
-    {
-        firstName = Request.Form["firstName"];
-        lastName = Request.Form["lastName"];
-
-        var db = Database.Open("Account");
-        var insertCommand = "INSERT INTO UserAccount (firstName, lastName) VALUES(@0, @1)";
-        db.Execute(insertCommand, firstName, lastName);
-        Response.Redirect("~/Login");
-    }
-}
-
-
-
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <!--[if lt IE 7 ]> <html lang="en" class="ie6 ielt8"> <![endif]-->
 <!--[if IE 7 ]>    <html lang="en" class="ie7 ielt8"> <![endif]-->
 <!--[if IE 8 ]>    <html lang="en" class="ie8"> <![endif]-->
@@ -41,8 +23,18 @@
                 <h2>Sign Up to YourSpace!</h2>
                 <label for="firstName">First Name:</label><br>
                 <input type="text" id="firstName" name="firstName" required><br>
+                <label for="middleName">Middle Name:</label><br>
+                <input type="text" id="middleName" name="middleName"><br/>
                 <label for="lastName">Last Name:</label><br>
                 <input type="text" id="lastName" name="lastName" required><br>
+                <label for="email">Email:</label><br>
+                <input type="text" id="email" name="email" required><br>
+                <label for="password">Password:</label><br>
+                <input type="password" id="password" name="word" required><br>
+                <label for="dOB">Date of Birth:</label><br>
+                <input type="text" id="dOB" name="dOB" required><br>
+                <label for="phoneNum">Phone Number:</label><br>
+                <input type="text" id="phoneNum" name="phoneNum" required><br>
                 <br />
                 <input type="submit" value="Register" />
 

@@ -10,7 +10,6 @@ using System.Text;
 namespace yourspace.Controllers
 {
     
-
     public class SignUpController : Controller
     {
         public ashenContext db = new ashenContext();
@@ -22,10 +21,10 @@ namespace yourspace.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult create(SignUp signup)
+        public ActionResult Create(SignUp signup)
         {
             Account acc = new Account();
-
+            return View();
         }
 
     }
