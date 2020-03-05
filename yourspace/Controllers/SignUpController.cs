@@ -24,22 +24,28 @@ namespace yourspace.Controllers
         public ActionResult Create(SignUp signup)
         {
             Account acc = new Account();
-<<<<<<< HEAD
-            return View();
-=======
             UserAccount uAcc = new UserAccount();
 
             acc.Email = signup.Email;
             acc.HashedPass = signup.Password;
-            uAcc.FirstName = signup.lName;
+            acc.SaltValue = "1234";
+            acc.AccountId = 1;
+            uAcc.AccountId = acc.AccountId;
+            uAcc.FirstName = signup.fName;
             uAcc.MiddleName = signup.mName;
             uAcc.LastName = signup.lName;
             uAcc.DateOfBirth = signup.dob;
             uAcc.PhoneNumber = signup.phoneNum;
 
+            db.Account.Add(acc);
+            db.UserAccount.Add(uAcc);
+            db.SaveChanges();
+
+            return RedirectToAction("Index", "Home");
 
 
->>>>>>> 32cb638bf166748dfc50f9e4c9b7a18dbed72558
+
+
         }
 
     }
