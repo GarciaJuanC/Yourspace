@@ -27,10 +27,10 @@ namespace yourspace.Controllers
             UserAccount uAcc = new UserAccount();
 
             acc.Email = signup.Email;
-            acc.HashedPass = signup.Password;
-            acc.SaltValue = "1234";
-            acc.AccountId = 1;
-            uAcc.AccountId = acc.AccountId;
+            acc.HashedPass = generateHash(signup.Password);
+
+
+           
             uAcc.FirstName = signup.fName;
             uAcc.MiddleName = signup.mName;
             uAcc.LastName = signup.lName;
@@ -42,10 +42,18 @@ namespace yourspace.Controllers
             db.SaveChanges();
 
             return RedirectToAction("Index", "Home");
+        }
 
+        public string generateHash(string password)
+        {
+            string hashPass = "";
 
+            return hashPass;
+        }
 
-
+        public ActionResult uploadPicture()
+        {
+            return View();
         }
 
     }
