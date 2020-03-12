@@ -17,6 +17,7 @@ namespace yourspace.Models
 
         public virtual DbSet<Account> Account { get; set; }
         public virtual DbSet<AdminAccount> AdminAccount { get; set; }
+        public virtual DbSet<Posts> Posts { get; set; }
         public virtual DbSet<UserAccount> UserAccount { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -63,6 +64,32 @@ namespace yourspace.Models
                     .HasConstraintName("AdminAccount_fk");
             });
 
+            modelBuilder.Entity<Posts>(entity =>
+            {
+                entity.HasKey(e => new { e.AccountId, e.PostTime })
+                    .HasName("Post_pk");
+
+                entity.Property(e => e.AccountId).HasColumnName("AccountID");
+
+                entity.Property(e => e.PostTime)
+                    .HasColumnName("postTime")
+                    .HasColumnType("datetime");
+
+                entity.Property(e => e.PhotoPath)
+                    .HasColumnName("photoPath")
+                    .HasMaxLength(100);
+
+                entity.Property(e => e.TextPost)
+                    .HasColumnName("textPost")
+                    .HasMaxLength(154);
+
+                entity.HasOne(d => d.Account)
+                    .WithMany(p => p.Posts)
+                    .HasForeignKey(d => d.AccountId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("Posts_fk");
+            });
+
             modelBuilder.Entity<UserAccount>(entity =>
             {
                 entity.HasKey(e => e.AccountId)
@@ -81,6 +108,8 @@ namespace yourspace.Models
                 entity.Property(e => e.LastName)
                     .IsRequired()
                     .HasMaxLength(128);
+
+                entity.Property(e => e.MiddleName).HasMaxLength(128);
 
                 entity.Property(e => e.PhoneNumber).HasMaxLength(15);
 
