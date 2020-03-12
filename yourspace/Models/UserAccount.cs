@@ -16,6 +16,7 @@ namespace yourspace.Models
         public DateTime? DateOfBirth { get; set; }
         public string PhoneNumber { get; set; }
         public string MiddleName { get; set; }
+        public string PhotoPath { get; set; }
 
         public virtual Account Account { get; set; }
         public virtual ICollection<Posts> Posts { get; set; }

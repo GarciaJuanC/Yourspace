@@ -113,6 +113,8 @@ namespace yourspace.Models
 
                 entity.Property(e => e.PhoneNumber).HasMaxLength(15);
 
+                entity.Property(e => e.PhotoPath).HasMaxLength(100);
+
                 entity.HasOne(d => d.Account)
                     .WithOne(p => p.UserAccount)
                     .HasForeignKey<UserAccount>(d => d.AccountId)
