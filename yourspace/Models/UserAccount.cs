@@ -15,11 +15,7 @@ namespace yourspace.Models
         public string LastName { get; set; }
         public DateTime? DateOfBirth { get; set; }
         public string PhoneNumber { get; set; }
-<<<<<<< HEAD
-=======
         public string MiddleName { get; set; }
-
->>>>>>> master
         public virtual Account Account { get; set; }
         public virtual ICollection<Posts> Posts { get; set; }
     }
