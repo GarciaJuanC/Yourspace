@@ -18,11 +18,6 @@ namespace yourspace.Controllers
             return View();
         }
 
-        public ActionResult CheckLogin()
-        {
-            return RedirectToAction("Index", "Home");
-        }
-
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult CheckLogin(LoginAccount logAcc)
@@ -32,17 +27,16 @@ namespace yourspace.Controllers
             {
                 if (_acc.HashedPass == getMD5(logAcc.Password + _acc.SaltValue))
                 {
-
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("Index", "Home", db.UserAccount.Where(s => s.AccountId == _acc.AccountId).FirstOrDefault());
                 }
                 else
                 {
-                    return View();
+                    return RedirectToAction("Index", "Login");
                 }
             }
             else
             {
-                return View();
+                return RedirectToAction("Index", "Login");
             }
 
         }
