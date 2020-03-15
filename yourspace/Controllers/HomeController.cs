@@ -13,6 +13,8 @@ namespace yourspace.Controllers
         private UserAccount UserAccount { get; set; }
         public ActionResult Index(UserAccount userAccount)
         {
+            // Session variable allows CallProfile to access same userAccount Object as Index
+            Session["UserAccount"] = userAccount; 
             ViewBag.Message = userAccount;
             return View();
 
@@ -20,6 +22,7 @@ namespace yourspace.Controllers
 
         public ActionResult CallProfile()
         {
+            UserAccount = (UserAccount) Session["UserAccount"]; // Cast works?
             return RedirectToAction("Index", "Profile", UserAccount);
         }
     }
