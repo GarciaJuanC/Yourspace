@@ -9,21 +9,16 @@ namespace yourspace.Controllers
 {
     public class HomeController : Controller
     {
-
-        private UserAccount UserAccount { get; set; }
         public ActionResult Index(UserAccount userAccount)
         {
-            // Session variable allows CallProfile to access same userAccount Object as Index
             Session["UserAccount"] = userAccount; 
             ViewBag.Message = userAccount;
             return View();
-
         }
 
         public ActionResult CallProfile()
         {
-            UserAccount = (UserAccount) Session["UserAccount"]; // Cast works?
-            return RedirectToAction("Index", "Profile", UserAccount);
+            return RedirectToAction("Index", "Profile", Session["UserAccount"]);
         }
     }
 }
