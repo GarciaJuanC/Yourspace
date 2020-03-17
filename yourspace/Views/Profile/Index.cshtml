@@ -1,22 +1,23 @@
 ﻿<!DOCTYPE html>
 
 <html lang="en">
-<!--<![endif]-->
 <head>
-
-    <title>Profile Page</title>
+    <title>Profile Page</title> <!--The <title> tag is required in all HTML documents and it defines the title of the document.-->
 </head>
+<link type="text/css" rel="stylesheet" href="~/Content/Profile.css" />
 <body>
+    <div class="header1">
+        <div id="searchArea" class="header1"><input placeholder="search here..." type="text" id="searchBox" /></div>
+        <div id="profilerArea1" class="header1">Profile</div>
+        <div id="profilerArea2" class="header1">|</div>
+    </div>
     <div>
         <h1>Profile Page</h1>
         <h1>User info</h1>
         <label>First Name: </label> @ViewBag.FirstName
         <br />
         <label>Last Name: </label> @ViewBag.LastName
-
-
     </div><!-- container -->
-
 </body>
 
 </html>
