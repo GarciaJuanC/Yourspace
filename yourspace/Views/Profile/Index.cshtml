@@ -1,22 +1,42 @@
 ﻿<!DOCTYPE html>
 
 <html lang="en">
-<!--<![endif]-->
 <head>
-
-    <title>Profile Page</title>
+    <title>Profile Page</title> <!--The <title> tag is required in all HTML documents and it defines the title of the document.-->
+    <link type="text/css" rel="stylesheet" href="~/Content/Profile.css" />
 </head>
+
 <body>
+    <div class="wrapper">
+        <div>"At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati"</div>
+        <div>"cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem"</div>
+    </div>
+    <div class="header1">
+        <div id="searchArea" class="header1"><input placeholder="search here..." type="text" id="searchBox" /></div>
+        <div id="profilerArea1" class="header1">Profile</div>
+        <div id="profilerArea2" class="header1">|</div>
+        <p>The time is @DateTime.Now</p>
+        <!-- Single statement block -->
+        @{ var myMessage = "Hello World"; }
+
+        <!-- Inline expression or variable -->
+        <p>The value of myMessage is: @myMessage</p>
+
+        <!-- Multi-statement block -->
+        @{
+            var greeting = "Welcome to our site!";
+            var weekDay = DateTime.Now.DayOfWeek;
+            var greetingMessage = greeting + " Today is: " + weekDay;
+        }
+        <p>The greeting is: @greetingMessage</p>
+    </div>
     <div>
         <h1>Profile Page</h1>
         <h1>User info</h1>
         <label>First Name: </label> @ViewBag.FirstName
         <br />
         <label>Last Name: </label> @ViewBag.LastName
-
-
     </div><!-- container -->
-
 </body>
 
 </html>
