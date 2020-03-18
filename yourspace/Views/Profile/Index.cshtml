@@ -3,41 +3,28 @@
 <html lang="en">
 <head>
     <title>Profile Page</title> <!--The <title> tag is required in all HTML documents and it defines the title of the document.-->
-<<<<<<< HEAD
     <link type="text/css" rel="stylesheet" href="~/Content/Profile.css" />
 </head>
-
 <body>
-    <div class="wrapper">
-        <div>"At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati"</div>
-        <div>"cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem"</div>
+    <div class="header">
+        <h1>Chania</h1>
     </div>
-=======
-</head>
-<link type="text/css" rel="stylesheet" href="~/Content/Profile.css" />
-<body>
->>>>>>> d4bc9a2ba54352247c9a2c64d14b8f509f9f8622
-    <div class="header1">
-        <div id="searchArea" class="header1"><input placeholder="search here..." type="text" id="searchBox" /></div>
-        <div id="profilerArea1" class="header1">Profile</div>
-        <div id="profilerArea2" class="header1">|</div>
-<<<<<<< HEAD
-        <p>The time is @DateTime.Now</p>
-        <!-- Single statement block -->
-        @{ var myMessage = "Hello World"; }
 
-        <!-- Inline expression or variable -->
-        <p>The value of myMessage is: @myMessage</p>
+    <div class="row">
+        <div class="col-3 menu">
+            <ul>
+                <li>The Flight</li>
+                <li>The City</li>
+                <li>The Island</li>
+                <li>The Food</li>
+            </ul>
+        </div>
 
-        <!-- Multi-statement block -->
-        @{
-            var greeting = "Welcome to our site!";
-            var weekDay = DateTime.Now.DayOfWeek;
-            var greetingMessage = greeting + " Today is: " + weekDay;
-        }
-        <p>The greeting is: @greetingMessage</p>
-=======
->>>>>>> d4bc9a2ba54352247c9a2c64d14b8f509f9f8622
+        <div class="col-9">
+            <h1>The City</h1>
+            <p>Chania is the capital of the Chania region on the island of Crete. The city can be divided in two parts, the old town and the modern city.</p>
+            <p>Resize the browser window to see how the content respond to the resizing.</p>
+        </div>
     </div>
     <div>
         <h1>Profile Page</h1>
@@ -46,6 +33,9 @@
         <br />
         <label>Last Name: </label> @ViewBag.LastName
     </div><!-- container -->
+
 </body>
 
 </html>
+
+
