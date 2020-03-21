@@ -16,19 +16,40 @@
                 
                 <img src="~/Content/Images/userPhoto/jonah.jpg" alt="Smiley face" height="200" width="263">
                 <br />
-                <li><font color="black"><label>Biography: </label> @ViewBag.Bio Senior Software Engineer from LB State, survived several squirrel attacks on campus, go Sharks!</font></li>
+                <li><font color="black"><label>Biography: </label> @ViewBag.Bio
+                    <p>Senior Software Engineer from LB State, survived several squirrel attacks on campus, go Sharks!
+                    </p>   
+                 </font></li>
             </ul>
         </div>
 
         <div class="col-9">
             <h1>@ViewBag.FirstName @ViewBag.LastName</h1>
-            <div style="width:850px;height:100px;border:1px solid #000;">~Insert make a post here~</div>
-            
-
+            <form action="/action_page.php">
+                <input type="text" id="ip4" placeholder="What's good?"/>
+                
+            </form>
+            <br />
+           
             <ul>
-                <li>Post1</li>
-                <li>Post2</li>
-                <li>Post3</li>
+                <li>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                    Vivamus fringilla feugiat velit. Fusce facilisis vel sem et semper.
+                    Donec tempus tortor sed ultricies mollis. In hac habitasse
+                    platea dictumst. Phasellus sit amet risus in ligula imperdiet
+                    tincidunt ut in diam. Mauris vehiculapellentesque ipsum, vel 
+                    rhoncus ipsum interdum sed.
+                </li>
+                <li>Proin arcu sem, suscipit quis justo vel, feugiat luctus dolor. 
+                Donec suscipit nibh eu arcu pretium euismod. Nullam sit amet feugiat velit. 
+                Quisque hendrerit felis nisi, eget vulputate sem semper id. 
+                Etiam iaculis leo quis neque sodales tempor. Sed malesuada orci vitae augue 
+                iaculis, et egestas ipsum posuere.</li>
+                <li>Ut at mollis lorem, ac placerat elit. Nullam ligula massa, luctus nec 
+                convallis nec, feugiat nec ligula. Pellentesque id augue mauris. In 
+                molestie, erat egestas sodales lobortis, diam neque bibendum augue, vel 
+                hendrerit urna augue sed mauris. Proin maximus mi quis metus ultrices, 
+                quis iaculis tortor posuere.</li>
             </ul>
         </div>
     </div>
