@@ -13,17 +13,18 @@
     <div class="row">
         <div class="col-3 menu">
             <ul>
-                <li><img src="~/Content/Images/userPhoto/jonah.jpg" alt="Smiley face" height="200" width="263"></li>
-                <li><label>First Name: </label> @ViewBag.FirstName</li>
-                <li><label>Last Name: </label> @ViewBag.LastName</li>
-                <li>Biograpy</li>
+                
+                <img src="~/Content/Images/userPhoto/jonah.jpg" alt="Smiley face" height="200" width="263">
+                <br />
+                <li><font color="black"><label>Biography: </label> @ViewBag.Bio Senior Software Engineer from LB State, survived several squirrel attacks on campus, go Sharks!</font></li>
             </ul>
         </div>
 
         <div class="col-9">
-            <h1>"Your Name"</h1>
-            <p>"Your bio"</p>
+            <h1>@ViewBag.FirstName @ViewBag.LastName</h1>
+            <div style="width:850px;height:100px;border:1px solid #000;">~Insert make a post here~</div>
             
+
             <ul>
                 <li>Post1</li>
                 <li>Post2</li>

@@ -17,7 +17,8 @@ namespace yourspace.Controllers
             //userAccount = db.UserAccount.Where(s => s.FirstName == "J").FirstOrDefault();
             ViewBag.FirstName = userAccount.FirstName;
             ViewBag.LastName = userAccount.LastName;
-           
+            
+
             return View();
         }
     }
