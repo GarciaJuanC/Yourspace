@@ -7,6 +7,8 @@ using System.Web.Mvc;
 using yourspace.Models;
 using System.Text;
 using System.IO;
+using Microsoft.Data.SqlClient;
+using Microsoft.EntityFrameworkCore;
 
 namespace yourspace.Controllers
 {
@@ -27,32 +29,53 @@ namespace yourspace.Controllers
         public ActionResult Create(SignUp signup)
         {
             Account acc = new Account();
-
-            acc.Email = signup.Email;
-            acc.HashedPass = generateHash(signup.Password);
-           
-            uAcc.FirstName = signup.fName;
-            uAcc.MiddleName = signup.mName;
-            uAcc.LastName = signup.lName;
-            uAcc.DateOfBirth = signup.dob;
-            uAcc.PhoneNumber = signup.phoneNum;
-
-            db.Account.Add(acc);
-            db.UserAccount.Add(uAcc);
-            db.SaveChanges();
-            if (db.Account.Find(uAcc.AccountId) != null)
+            try
             {
-                uploadPicture();
-            }
+                acc.Email = signup.Email;
+                acc.SaltValue = RandomString(5);
+                acc.HashedPass = generateHash(signup.Password + acc.SaltValue);
 
-            return View();
+                db.Account.Add(acc);
+                db.SaveChanges();
+
+                acc = db.Account.Where(s => s.Email == signup.Email).FirstOrDefault();
+
+                uAcc.AccountId = acc.AccountId;
+                uAcc.FirstName = signup.fName;
+                uAcc.MiddleName = signup.mName;
+                uAcc.LastName = signup.lName;
+                uAcc.DateOfBirth = signup.dob;
+                uAcc.PhoneNumber = signup.phoneNum;
+
+                db.UserAccount.Add(uAcc);
+                db.SaveChanges();
+
+                return RedirectToAction("uploadPicture", "SignUp");
+            }
+            catch (Exception ex)
+            {
+                ModelState.AddModelError("Email", "Email has already been registered!");
+                return View("Index",signup);
+            }
         }
 
-        public string generateHash(string password)
+        public string generateHash(string saltyPass)
         {
-            string hashPass = "";
+            string hash;
+            using (MD5 md5Hash = MD5.Create())
+            {
+                byte[] data = md5Hash.ComputeHash(Encoding.UTF8.GetBytes(saltyPass));
 
-            return hashPass;
+                StringBuilder sBuilder = new StringBuilder();
+
+                for (int i = 0; i < data.Length; i++)
+                {
+                    sBuilder.Append(data[i].ToString("x2"));
+                }
+
+                hash = sBuilder.ToString();
+            }
+            return hash;
         }
 
         private static Random random = new Random();
@@ -75,11 +98,10 @@ namespace yourspace.Controllers
                 string path = Path.Combine(Server.MapPath("~/UserImages"),
                                             RandomString(30),
                                             Path.GetFileName(file.FileName));
-                ourPath = path;
                 file.SaveAs(path);
-                uAcc.PhotoPath = ourPath;
+                uAcc.PhotoPath = path;
 
-                db.UserAccount.Add(uAcc);
+                db.UserAccount.Update(uAcc);
                 db.SaveChanges();
             }
             return RedirectToAction("Index", "Home");
