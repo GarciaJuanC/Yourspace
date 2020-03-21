@@ -22,7 +22,7 @@ namespace yourspace.Models
         public string fName { get; set; }
 
         [Display(Name = "Middle Name")]
-        [Required(AllowEmptyStrings = true)]
+        [Required(AllowEmptyStrings = false)]
         public string mName { get; set; }
 
         [Display(Name = "Last Name")]
