@@ -123,19 +123,17 @@ img {
     border: 5px solid black;
 }
 
-
-
 h1 {
     font-family: monospace;
 }
 
-#ip4 {
+#user_post {
     text-align: left;
     padding: 0.4em 0.4em 0.4em 0;
     border-radius: 25px;
     border: 2px solid #73AD21;
     padding: 20px;
-    width: 200px;
+    width: 300px;
     height: 150px;
     border-color: #89cff0
 }
