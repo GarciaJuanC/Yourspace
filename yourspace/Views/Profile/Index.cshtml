@@ -7,7 +7,7 @@
 </head>
 <body>
     <div class="header">
-        <h1>Yourspace</h1>
+        <h2>Yourspace</h2>
     </div>
     
     <div class="row">
@@ -26,30 +26,16 @@
         <div class="col-9">
             <h1>@ViewBag.FirstName @ViewBag.LastName</h1>
             <form action="/action_page.php">
-                <input type="text" id="user_post" placeholder="Tell the world what's good!"/>
-                
+                <!-- Manual spacing for userPost-->
+                <span style="padding-left:6em"><input type="text" id="user_post" placeholder="Tell the world what's good!" /></span><br>
             </form>
             <br />
-           
+            <!-- Display user's posts from the database-->
             <ul>
-                <li>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                    Vivamus fringilla feugiat velit. Fusce facilisis vel sem et semper.
-                    Donec tempus tortor sed ultricies mollis. In hac habitasse
-                    platea dictumst. Phasellus sit amet risus in ligula imperdiet
-                    tincidunt ut in diam. Mauris vehiculapellentesque ipsum, vel 
-                    rhoncus ipsum interdum sed.
-                </li>
-                <li>Proin arcu sem, suscipit quis justo vel, feugiat luctus dolor. 
-                Donec suscipit nibh eu arcu pretium euismod. Nullam sit amet feugiat velit. 
-                Quisque hendrerit felis nisi, eget vulputate sem semper id. 
-                Etiam iaculis leo quis neque sodales tempor. Sed malesuada orci vitae augue 
-                iaculis, et egestas ipsum posuere.</li>
-                <li>Ut at mollis lorem, ac placerat elit. Nullam ligula massa, luctus nec 
-                convallis nec, feugiat nec ligula. Pellentesque id augue mauris. In 
-                molestie, erat egestas sodales lobortis, diam neque bibendum augue, vel 
-                hendrerit urna augue sed mauris. Proin maximus mi quis metus ultrices, 
-                quis iaculis tortor posuere.</li>
+                @foreach (var post in ViewBag.postList)
+                {
+                    <li>@post.TextPost <br /><b>Post Time:</b> @post.PostTime</li>
+                }
             </ul>
         </div>
     </div>
