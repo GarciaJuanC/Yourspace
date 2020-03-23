@@ -24,17 +24,19 @@
         </div>
 
         <div class="col-9">
-            <h1>@ViewBag.FirstName @ViewBag.LastName</h1>
+            <h1 style="margin-left: 60px;" id="user_name">@ViewBag.FirstName @ViewBag.LastName</h1>
+            <br />
+
             <form action="/action_page.php">
                 <!-- Manual spacing for userPost-->
-                <span style="padding-left:6em"><input type="text" id="user_post" placeholder="Tell the world what's good!" /></span><br>
+                <input type="text" id="user_post" style="margin-left: 40px;" placeholder="Tell the world what's good!" />
             </form>
             <br />
             <!-- Display user's posts from the database-->
             <ul>
                 @foreach (var post in ViewBag.postList)
                 {
-                    <li>@post.TextPost <br /><b>Post Time:</b> @post.PostTime</li>
+                    <li>@post.TextPost <br /><object align="right" ><b>Post Time:</b>@post.PostTime</object> </li>
                 }
             </ul>
         </div>
