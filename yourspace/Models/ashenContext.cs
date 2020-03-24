@@ -33,6 +33,14 @@ namespace yourspace.Models
         {
             modelBuilder.Entity<Account>(entity =>
             {
+                entity.HasIndex(e => e.AccountId)
+                    .HasName("UQ__Account__349DA587ACE39D28")
+                    .IsUnique();
+
+                entity.HasIndex(e => e.Email)
+                    .HasName("UQ__Account__A9D10534B3840B73")
+                    .IsUnique();
+
                 entity.Property(e => e.AccountId).HasColumnName("AccountID");
 
                 entity.Property(e => e.Email)
@@ -52,6 +60,10 @@ namespace yourspace.Models
             {
                 entity.HasKey(e => e.AccountId)
                     .HasName("AdminAcount_pk");
+
+                entity.HasIndex(e => e.AccountId)
+                    .HasName("UQ__AdminAcc__349DA58778BA8517")
+                    .IsUnique();
 
                 entity.Property(e => e.AccountId)
                     .HasColumnName("AccountID")
@@ -77,11 +89,11 @@ namespace yourspace.Models
 
                 entity.Property(e => e.PhotoPath)
                     .HasColumnName("photoPath")
-                    .HasMaxLength(100);
+                    .HasMaxLength(25);
 
                 entity.Property(e => e.TextPost)
                     .HasColumnName("textPost")
-                    .HasMaxLength(154);
+                    .HasMaxLength(150);
 
                 entity.HasOne(d => d.Account)
                     .WithMany(p => p.Posts)
@@ -95,9 +107,15 @@ namespace yourspace.Models
                 entity.HasKey(e => e.AccountId)
                     .HasName("UserAccount_pk");
 
+                entity.HasIndex(e => e.AccountId)
+                    .HasName("UQ__UserAcco__349DA5874C18D4EF")
+                    .IsUnique();
+
                 entity.Property(e => e.AccountId)
                     .HasColumnName("AccountID")
                     .ValueGeneratedNever();
+
+                entity.Property(e => e.Biography).HasMaxLength(255);
 
                 entity.Property(e => e.DateOfBirth).HasColumnType("date");
 
@@ -111,9 +129,15 @@ namespace yourspace.Models
 
                 entity.Property(e => e.MiddleName).HasMaxLength(128);
 
+                entity.Property(e => e.Occupation).HasMaxLength(70);
+
                 entity.Property(e => e.PhoneNumber).HasMaxLength(15);
 
                 entity.Property(e => e.PhotoPath).HasMaxLength(100);
+
+                entity.Property(e => e.ULocation)
+                    .HasColumnName("uLocation")
+                    .HasMaxLength(50);
 
                 entity.HasOne(d => d.Account)
                     .WithOne(p => p.UserAccount)
