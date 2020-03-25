@@ -37,5 +37,9 @@ namespace yourspace.Models
         [Required(AllowEmptyStrings = true)]
         public string phoneNum { get; set; }
 
+        [Display(Name = "User Post")]
+        [Required(AllowEmptyStrings = false)]
+        public string UserPost { get; set; }
+
     }
 }

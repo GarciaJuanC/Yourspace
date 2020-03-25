@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@model yourspace.Models.SignUp
+<!DOCTYPE html>
 
 <html lang="en">
 <head>
@@ -9,24 +10,40 @@
     <div class="header">
         <h2>Yourspace</h2>
     </div>
-    
+
     <div class="row">
         <div class="col-1">
             <ul>
-                
+
                 <img src="~/Content/Images/userPhoto/jonah.jpg" alt="Smiley face" height="200" width="263">
                 <br />
-                <li><font color="black"><label>Biography: </label> @ViewBag.Bio
-                    <p>Senior Software Engineer from LB State, go Sharks!
-                    </p>   
-                 </font></li>
+                <li>
+                    <font color="black">
+                        <label>Biography: </label><br /> @ViewBag.Bio
+                    </font>
+                </li>
             </ul>
         </div>
 
         <div class="col-2">
             <h1 style="margin-left: 60px;" id="user_name">@ViewBag.FirstName @ViewBag.LastName</h1>
             <br />
+            @using (Html.BeginForm("UserPost", "Profile", FormMethod.Post))
+            {
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary(true)
 
+                <div>
+                    @Html.EditorFor(model => model.UserPost, new { htmlAttributes = new { @class = "form-control", placeholder = "Tell the world what's good!" } })
+                    @Html.ValidationMessageFor(model => model.UserPost)
+                    <input class="btn btn-default" type="submit" value="Create" />
+                </div>
+
+            }
+
+
+
+            <!-- onsubmit="myFunction()" -->
             <form action="/action_page.php">
                 <!-- Manual spacing for userPost-->
                 <input type="text" id="user_post" style="margin-left: 40px;" placeholder="Tell the world what's good!" />
@@ -36,7 +53,7 @@
             <ul>
                 @foreach (var post in ViewBag.postList)
                 {
-                    <li>@post.TextPost <br /><object align="right" ><b>Post Time:</b>@post.PostTime</object> </li>
+                    <li>@post.TextPost <br /><object align="right"><b>Post Time:</b>@post.PostTime</object> </li>
                 }
             </ul>
         </div>

@@ -26,7 +26,7 @@ namespace yourspace.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(SignUp signup)
+        public ActionResult Create(SignUp signup) // Ask why SignUp object was passed?
         {
             Account acc = new Account();
             try
