@@ -34,16 +34,23 @@ namespace yourspace.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult UserPost(SignUp signup)
         {
+            UserAccount = ((UserAccount)Session["UserAccount"]);
             Posts post = new Posts();
 
             post.AccountId = ((UserAccount)Session["UserAccount"]).AccountId; // Proud if this works
             post.PostTime = DateTime.Now;
             post.TextPost = signup.UserPost;
 
+            // Maybe a better way to do this?
+            ViewBag.FirstName = UserAccount.FirstName;
+            ViewBag.LastName = UserAccount.LastName;
+            ViewBag.Bio = UserAccount.Biography;
+            ViewBag.postList = db.Posts.Where(p => p.AccountId == ((UserAccount)Session["UserAccount"]).AccountId);
+
             db.Posts.Add(post);
             db.SaveChanges();
 
-            return View();
+            return View("Index");
         }
     }
 }
