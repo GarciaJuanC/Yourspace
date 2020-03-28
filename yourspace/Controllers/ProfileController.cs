@@ -37,7 +37,7 @@ namespace yourspace.Controllers
             UserAccount = ((UserAccount)Session["UserAccount"]);
             Posts post = new Posts();
 
-            post.AccountId = ((UserAccount)Session["UserAccount"]).AccountId; // Proud if this works
+            post.AccountId = ((UserAccount)Session["UserAccount"]).AccountId; // Proud if this cast works (It did!)
             post.PostTime = DateTime.Now;
             post.TextPost = signup.UserPost;
 
