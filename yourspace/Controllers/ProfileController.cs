@@ -52,5 +52,12 @@ namespace yourspace.Controllers
 
             return View("Index");
         }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult EditProfile(LoginAccount logAcc)
+        {
+            return RedirectToAction("Index", "SignUp");
+        }
     }
 }

@@ -107,10 +107,10 @@ h2 {
     left: 100px;
     text-align: left;
     padding: 0.4em 0.4em 0.4em 0;
-    border-radius: 25px;
+    border-radius: 100px;
     border: 2px solid #73AD21;
     padding: 20px;
-    width: 400px;
+    width: 200px;
     height: 150px;
     border-color: black;
     
@@ -119,4 +119,8 @@ h2 {
 ::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
     color: #d3d3d3;
     opacity: 1; /* Firefox */
+}
+
+textarea {
+    max-width: 280px;
 }
