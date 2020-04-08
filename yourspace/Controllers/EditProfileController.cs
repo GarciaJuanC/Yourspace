@@ -38,7 +38,7 @@ namespace yourspace.Controllers
             db.UserAccount.Update(thisUserAccount);
             db.SaveChanges();
 
-            return RedirectToAction("index", "Profile",Session["UserAccount"]);
+            return RedirectToAction("index", "Profile", thisUserAccount);
             
         }
 
