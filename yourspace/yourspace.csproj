@@ -219,6 +219,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\EditProfileController.cs" />
     <Compile Include="Controllers\ProfileController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
@@ -230,6 +231,7 @@
     <Compile Include="Models\Account.cs" />
     <Compile Include="Models\AdminAccount.cs" />
     <Compile Include="Models\ashenContext.cs" />
+    <Compile Include="Models\EditProfile.cs" />
     <Compile Include="Models\LoginAccount.cs" />
     <Compile Include="Models\Posts.cs" />
     <Compile Include="Models\SignUp.cs" />
@@ -279,6 +281,7 @@
     <Content Include="Views\Profile\Index.cshtml" />
     <Content Include="Views\Profile\_ViewStart.cshtml" />
     <Content Include="Views\Shared\_LayoutProfile.cshtml" />
+    <Content Include="Views\EditProfile\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

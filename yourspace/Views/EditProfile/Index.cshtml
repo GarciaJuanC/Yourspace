@@ -1,0 +1,56 @@
+﻿@model yourspace.Models.EditProfile
+
+<!DOCTYPE html>
+<!--[if lt IE 7 ]> <html lang="en" class="ie6 ielt8"> <![endif]-->
+<!--[if IE 7 ]>    <html lang="en" class="ie7 ielt8"> <![endif]-->
+<!--[if IE 8 ]>    <html lang="en" class="ie8"> <![endif]-->
+<!-- https://docs.microsoft.com/en-us/aspnet/web-pages/overview/getting-started/introducing-aspnet-web-pages-2/entering-data <!-->
+
+<html lang="en">
+<!--<![endif]-->
+<head>
+    <style>
+        h2 {
+            color: black;
+            margin: 5px;
+            text-align: center;
+        }
+    </style>
+    <title>Edit Profile</title>
+</head>
+
+<body>
+    <div class="container">
+        <section id="content">
+            <hr />
+            <div>
+                @using (Html.BeginForm("Update", "EditProfile", FormMethod.Post))
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.ValidationSummary(true)
+
+                    <div>
+                        @Html.EditorFor(model => model.fName, new { htmlAttributes = new { @class = "form-control", placeholder = "First Name" } })
+                        @Html.ValidationMessageFor(model => model.fName)
+                    </div>
+                    <div>
+                        @Html.EditorFor(model => model.lName, new { htmlAttributes = new { @class = "form-control", placeholder = "Last Name" } })
+                        @Html.ValidationMessageFor(model => model.lName)
+                    </div>
+                    <div>
+                        @Html.EditorFor(model => model.biography, new { htmlAttributes = new { @class = "form-control", placeholder = "Biography" } })
+                        @Html.ValidationMessageFor(model => model.biography)
+                    </div>
+                    <div>
+                        @Html.EditorFor(model => model.phoneNum, new { htmlAttributes = new { @class = "form-control", placeholder = "Phone Number" } })
+                        @Html.ValidationMessageFor(model => model.phoneNum)
+                    </div>
+
+                    <input class="btn btn-default" type="submit" value="Create" />
+                }
+            </div>
+
+        </section><!-- content -->
+    </div><!-- container -->
+</body>
+</html>

@@ -57,7 +57,7 @@ namespace yourspace.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult EditProfile(LoginAccount logAcc)
         {
-            return RedirectToAction("Index", "SignUp");
+            return RedirectToAction("Index", "EditProfile", Session["UserAccount"]);
         }
     }
 }
