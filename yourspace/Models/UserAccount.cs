@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 
 namespace yourspace.Models
@@ -23,5 +24,18 @@ namespace yourspace.Models
 
         public virtual Account Account { get; set; }
         public virtual ICollection<Posts> Posts { get; set; }
+
+        public FriendList friendList = new FriendList();
+        private string jsonString;
+
+        public void SerializeObject()
+        {
+            jsonString = JsonConvert.SerializeObject(friendList);
+        }
+
+        public void DeserializeObject()
+        {
+            friendList = JsonConvert.DeserializeObject<FriendList>(jsonString);
+        }
     }
 }

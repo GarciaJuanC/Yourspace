@@ -232,6 +232,7 @@
     <Compile Include="Models\AdminAccount.cs" />
     <Compile Include="Models\ashenContext.cs" />
     <Compile Include="Models\EditProfile.cs" />
+    <Compile Include="Models\FriendList.cs" />
     <Compile Include="Models\LoginAccount.cs" />
     <Compile Include="Models\Posts.cs" />
     <Compile Include="Models\SignUp.cs" />
