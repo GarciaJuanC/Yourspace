@@ -18,6 +18,11 @@ namespace yourspace.Controllers
         {
             Session["UserAccount"] = userAccount;
             thisUserAccount = (UserAccount)Session["UserAccount"];
+            ViewBag.FirstName = userAccount.FirstName;
+            ViewBag.LastName = userAccount.LastName;
+            ViewBag.Bio = userAccount.Biography;
+            ViewBag.PhoneNum = userAccount.PhoneNumber;
+
             return View();
         }
 
@@ -30,11 +35,20 @@ namespace yourspace.Controllers
 
             thisUserAccount = db.UserAccount.Where(s => s.AccountId == ((UserAccount)Session["UserAccount"]).AccountId).FirstOrDefault();
 
-            thisUserAccount.FirstName = editProfile.fName;
-            thisUserAccount.LastName = editProfile.lName;
-            thisUserAccount.PhoneNumber = editProfile.phoneNum;
-            thisUserAccount.Biography = editProfile.biography;
+            // Conditional statements so user doesnt't have to edit every attribute when they edit their profile
 
+            if (editProfile.fName == null) { thisUserAccount.FirstName = thisUserAccount.FirstName; }
+            else if (editProfile.fName != null) { thisUserAccount.FirstName = editProfile.fName; }
+
+            if (editProfile.lName == null) { thisUserAccount.LastName = thisUserAccount.LastName; }
+            else if (editProfile.lName != null) { thisUserAccount.LastName = editProfile.lName; }
+
+            if (editProfile.phoneNum == null) { thisUserAccount.PhoneNumber = thisUserAccount.PhoneNumber; }
+            else if (editProfile.phoneNum != null) { thisUserAccount.PhoneNumber = editProfile.phoneNum; }
+
+            if (editProfile.biography == null) { thisUserAccount.Biography = thisUserAccount.Biography; }
+            else if (editProfile.biography != null) { thisUserAccount.Biography = editProfile.biography; }
+            
             db.UserAccount.Update(thisUserAccount);
             db.SaveChanges();
 

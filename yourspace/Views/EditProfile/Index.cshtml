@@ -30,19 +30,19 @@
                     @Html.ValidationSummary(true)
 
                     <div>
-                        @Html.EditorFor(model => model.fName, new { htmlAttributes = new { @class = "form-control", placeholder = "First Name" } })
+                        @Html.EditorFor(model => model.fName, new { htmlAttributes = new { @class = "form-control", placeholder = @ViewBag.FirstName } })
                         @Html.ValidationMessageFor(model => model.fName)
                     </div>
                     <div>
-                        @Html.EditorFor(model => model.lName, new { htmlAttributes = new { @class = "form-control", placeholder = "Last Name" } })
+                        @Html.EditorFor(model => model.lName, new { htmlAttributes = new { @class = "form-control", placeholder = @ViewBag.LastName } })
                         @Html.ValidationMessageFor(model => model.lName)
                     </div>
                     <div>
-                        @Html.EditorFor(model => model.biography, new { htmlAttributes = new { @class = "form-control", placeholder = "Biography" } })
+                        @Html.EditorFor(model => model.biography, new { htmlAttributes = new { @class = "form-control", placeholder = @ViewBag.Bio } })
                         @Html.ValidationMessageFor(model => model.biography)
                     </div>
                     <div>
-                        @Html.EditorFor(model => model.phoneNum, new { htmlAttributes = new { @class = "form-control", placeholder = "Phone Number" } })
+                        @Html.EditorFor(model => model.phoneNum, new { htmlAttributes = new { @class = "form-control", placeholder = @ViewBag.PhoneNum } })
                         @Html.ValidationMessageFor(model => model.phoneNum)
                     </div>
 
