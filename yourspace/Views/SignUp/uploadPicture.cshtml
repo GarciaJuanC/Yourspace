@@ -1,23 +1,41 @@
 ﻿<head>
-<link href="@Url.Content("~/Content/base.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/base.css")" rel="stylesheet" type="text/css" />
 </head>
 <div>
     @using (Html.BeginForm("checkPicture", "SignUp", FormMethod.Post))
     {
-        <hr />
+
+        
         <div>
-            <h1>Upload a picture of yourself!</h1>
+            <p>
+
+            </p>
+            <h2>Upload Your Profile Picture!</h2>
         </div>
 
+
+        <!--
         <div class="upload-btn-wrapper">
+            <input type='file' onchange="readURL(this);" />
+            <img id="upImg" src="http://placehold.it/180" alt="your image" />
             <button class="btn">Upload a file</button>
-            <input type="file" name="fileUpload" onchange="readURL(this)" required />
+            <button class="btn">Webcam</button>
+            <button class="btn">next</button>
         </div>
-        <button class="btn">next</button>
-        <hr />
-        <img class="img-thumbnail" id="upImg" alt="nothing" />
+        -->
+
+        <form id="form1" runat="server">
+            <input type='file' id="imgInp" style="display:none" />
+            <img id="blah" style="border-radius:50%" src="http://via.placeholder.com/150x150" alt="your image" height="300px" width="300px" />
+
+        </form>
+        <input class="btn btn-default" type="submit" value="UPLOAD PIC" />
+
+
     }
+
 </div>
+
 @section Scripts{
-    <script src="~/Scripts/UploadData.js"></script>
+    <script src="~/Scripts/uploadData.js"></script>
 }

@@ -1,12 +1,32 @@
-﻿function readURL(input) {
+﻿//function readURL(input) {
+//    if (input.files && input.files[0]) {
+//        var reader = new FileReader();
+//
+//        reader.onload = function (e) {
+//            $('#upImg')
+//                .attr('src', e.target.result);
+//        };
+//
+//        reader.readAsDataURL(input.files[0]);
+//    }
+//}
+
+$('#blah').click(function () {
+    $('#imgInp').click();
+})
+
+
+function readURL(input) {
     if (input.files && input.files[0]) {
         var reader = new FileReader();
-
         reader.onload = function (e) {
-            $('#upImg')
-                .attr('src', e.target.result);
-        };
+            $('#blah').attr('src', e.target.result);
+        }
 
         reader.readAsDataURL(input.files[0]);
     }
 }
+
+$("#imgInp").change(function () {
+    readURL(this);
+});

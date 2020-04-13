@@ -2,9 +2,17 @@
     font-family: Asimov;
 }
 
-button{
-    font-family:'Times New Roman';
+button {
+    font-family: 'Times New Roman';
 }
+
+
+.header {
+    background-color: black;
+    color: #ffffff;
+    padding: 45px;
+}
+
 
 .upload-btn-wrapper {
     position: relative;
@@ -13,7 +21,7 @@ button{
 }
 
 .btn {
-    font-family:Meticula;
+    font-family: Meticula;
     color: #494949 !important;
     text-transform: uppercase;
     text-decoration: none;
