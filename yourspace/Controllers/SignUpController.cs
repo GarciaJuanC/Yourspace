@@ -86,24 +86,37 @@ namespace yourspace.Controllers
               .Select(s => s[random.Next(s.Length)]).ToArray());
         }
 
+        //GET fileUpload
+        [HttpGet]
         public ActionResult uploadPicture()
         {
             return View();
         }
 
+        [HttpPost]
         public ActionResult checkPicture(HttpPostedFileBase file)
         {
-            if (file != null && file.ContentLength > 0)
+            if (file != null )
             {
-                string path = Path.Combine(Server.MapPath("~/UserImages"),
-                                            RandomString(30),
-                                            Path.GetFileName(file.FileName));
-                file.SaveAs(path);
-                uAcc.PhotoPath = path;
+                string path = Server.MapPath("~/Uploads/");
+                if (!Directory.Exists(path))
+                {
+                    Directory.CreateDirectory(path);
+                }
+                file.SaveAs(path + Path.GetFileName(file.FileName));
+                ViewBag.Message = "File uploaded successfully";
+                
+                
+                        //string path = Path.Combine(Server.MapPath("~/UserImages"), RandomString(30), Path.GetFileName(file.FileName));
+                        //file.SaveAs(path);
+                        //uAcc.PhotoPath = path;
 
-                db.UserAccount.Update(uAcc);
-                db.SaveChanges();
-            }
+                        //db.UserAccount.Update(uAcc);
+                        //db.SaveChanges();
+                    }
+                    //ViewBag.FileStatus = "File uploaded successfully.";
+                
+            
             return RedirectToAction("Index", "Home");
         }
 

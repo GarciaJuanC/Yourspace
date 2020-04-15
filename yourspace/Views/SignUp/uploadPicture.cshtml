@@ -1,40 +1,55 @@
-﻿<head>
+﻿@model yourspace.Models.UserAccount
+
+<head>
     <link href="@Url.Content("~/Content/base.css")" rel="stylesheet" type="text/css" />
 </head>
-<div>
-    @using (Html.BeginForm("checkPicture", "SignUp", FormMethod.Post))
-    {
 
-        
-        <div>
-            <p>
-
-            </p>
-            <h2>Upload Your Profile Picture!</h2>
-        </div>
+@using (Html.BeginForm("checkPicture", "SignUp", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
 
 
-        <!--
-        <div class="upload-btn-wrapper">
-            <input type='file' onchange="readURL(this);" />
-            <img id="upImg" src="http://placehold.it/180" alt="your image" />
-            <button class="btn">Upload a file</button>
-            <button class="btn">Webcam</button>
-            <button class="btn">next</button>
+    <div>
+        <p>
+
+        </p>
+        <h2>Upload Your Profile Picture!</h2>
+    </div>
+
+    <form action="" method="post" enctype="multipart/form-data">
+
+        <label for="file">Filename:</label>
+        <input type="file" name="file" id="file" />
+
+        <input type="submit" />
+    </form>
+
+
+    <!--
+    <div class="upload-btn-wrapper">
+        <input type='file' onchange="readURL(this);" />
+        <img id="upImg" src="http://placehold.it/180" alt="your image" />
+        <button class="btn">Upload a file</button>
+        <button class="btn">Webcam</button>
+        <button class="btn">next</button>
+    </div>
+    -->
+
+    <!--
+         <div class="form-horizontal">
+            <hr />
+            <div class="form-group">
+                    <form id="form1" runat="server" method="post" enctype="multipart/form-data">
+                        <input type='file' id="imgInp" style="display:none" />
+                        <img id="blah" style="border-radius:50%" src="http://via.placeholder.com/150x150" alt="your image" height="300px" width="300px" />
+                    </form>
+                    <input class="btn btn-default" type="submit" value="Upload" />
+                @ViewBag.Message
+
+            </div>
+
         </div>
         -->
-
-        <form id="form1" runat="server">
-            <input type='file' id="imgInp" style="display:none" />
-            <img id="blah" style="border-radius:50%" src="http://via.placeholder.com/150x150" alt="your image" height="300px" width="300px" />
-
-        </form>
-        <input class="btn btn-default" type="submit" value="UPLOAD PIC" />
-
-
-    }
-
-</div>
+}
 
 @section Scripts{
     <script src="~/Scripts/uploadData.js"></script>

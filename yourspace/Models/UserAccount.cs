@@ -1,6 +1,8 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Web;
 
 namespace yourspace.Models
 {
@@ -17,7 +19,10 @@ namespace yourspace.Models
         public string LastName { get; set; }
         public DateTime? DateOfBirth { get; set; }
         public string PhoneNumber { get; set; }
+
         public string PhotoPath { get; set; }
+
+        //public HttpPostedFile ImageFile { get; set; }
         public string Biography { get; set; }
         public string ULocation { get; set; }
         public string Occupation { get; set; }
