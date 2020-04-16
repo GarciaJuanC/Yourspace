@@ -6,13 +6,14 @@
     <title>@ViewBag.Title yourspace</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+
 </head>
 <body>
     <div class="container body-content">
         @RenderBody()
-        
+
         <footer>
-            <p>&copy; @DateTime.Now.Year - <img src="~/Content/Images/Logo.jpg" height="42" width="84"/></p>
+            <p>&copy; @DateTime.Now.Year - <img src="~/Content/Images/Logo.jpg" height="42" width="84" /></p>
         </footer>
     </div>
 
