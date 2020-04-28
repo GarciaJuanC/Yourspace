@@ -20,14 +20,12 @@ namespace yourspace.Controllers
             Session["UserAccount"] = userAccount;
             UserAccount = (UserAccount) Session["UserAccount"];
             IList<Posts> postList = new List<Posts>();
-            // Query String for debugging
-            
+           
+            // Elements for the view
             ViewBag.FirstName = userAccount.FirstName;
             ViewBag.LastName = userAccount.LastName;
             ViewBag.Bio = userAccount.Biography;
             ViewBag.postList = db.Posts.Where(p => p.AccountId == userAccount.AccountId);
-
-            //fillFriendsList(UserAccount);
 
             this.fillFriendsList();
 
@@ -38,39 +36,28 @@ namespace yourspace.Controllers
 
         public void fillFriendsList()
         {
-            UserAccount userAccount = db.UserAccount.AsNoTracking().Where(uA => uA.AccountId == UserAccount.AccountId).FirstOrDefault();
-
+            // Query Syntax
+            // ERROR: Caused a tracking Error with PK's of UserAccount (AccountID), where clause fixed this
             var allUsers = from user in db.UserAccount
+                           where user.AccountId != UserAccount.AccountId
                            select user;
+
 
             foreach (var user in allUsers)
             {
-                userAccount.friendsList.Add(user.AccountId);
+                UserAccount.friendsList.Add(user.AccountId);
             }
 
-            // Serialize object
 
-            // This prevents the error I was getting about tracking PK's!
-            // SOURCE: https://stackoverflow.com/questions/13510204/json-net-self-referencing-loop-detected
-
-            string jsonString = JsonConvert.SerializeObject(userAccount.friendsList, Formatting.None,
-                        new JsonSerializerSettings()
-                        {
-                            ReferenceLoopHandling = ReferenceLoopHandling.Ignore
-                        });
-
-            userAccount.FriendsList = jsonString;
-
-            //foreach()
-
-            //int x = JsonConvert.DeserializeObject<int>(jsonString);
-            userAccount.friendsList = JsonConvert.DeserializeObject<List<int>>(jsonString);
+            string jsonString = JsonConvert.SerializeObject(UserAccount.friendsList);
+            UserAccount.FriendsList = jsonString;
+            UserAccount.friendsList = JsonConvert.DeserializeObject<List<int>>(jsonString);
 
 
-            db.Update(userAccount); // ALSO changed this to not be db.UserAccount.Update... maybe this fixed the problem???
+            db.Update(UserAccount); 
             db.SaveChanges();
-
         }
+
 
         [HttpPost]
         [ValidateAntiForgeryToken]

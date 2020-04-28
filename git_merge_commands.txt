@@ -20,3 +20,9 @@
 1) git add .
 2) git commit -m "Enter a commit message"
 3) git push
+
+///////////////////////////////////////
+/// REMOVE last commit to GitHub
+///////////////////////////////////////
+
+git push -f origin HEAD^:master
