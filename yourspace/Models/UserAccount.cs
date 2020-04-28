@@ -27,6 +27,6 @@ namespace yourspace.Models
         public virtual ICollection<Posts> Posts { get; set; }
 
         
-        public ICollection<int> friendsList = new List<int>(); // For storing serialized objects
+        public List<int> friendsList = new List<int>(); // For storing serialized objects
     }
 }

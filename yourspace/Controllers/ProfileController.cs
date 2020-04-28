@@ -61,8 +61,12 @@ namespace yourspace.Controllers
 
             userAccount.FriendsList = jsonString;
 
-            
-            // Possible solution: https://www.pmichaels.net/tag/dbcontextoptionsbuilder-enablesensitivedatalogging/
+            //foreach()
+
+            //int x = JsonConvert.DeserializeObject<int>(jsonString);
+            userAccount.friendsList = JsonConvert.DeserializeObject<List<int>>(jsonString);
+
+
             db.Update(userAccount); // ALSO changed this to not be db.UserAccount.Update... maybe this fixed the problem???
             db.SaveChanges();
 
