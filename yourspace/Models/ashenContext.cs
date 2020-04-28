@@ -17,6 +17,7 @@ namespace yourspace.Models
 
         public virtual DbSet<Account> Account { get; set; }
         public virtual DbSet<AdminAccount> AdminAccount { get; set; }
+        public virtual DbSet<FriendRequest> FriendRequest { get; set; }
         public virtual DbSet<Posts> Posts { get; set; }
         public virtual DbSet<UserAccount> UserAccount { get; set; }
 
@@ -24,7 +25,6 @@ namespace yourspace.Models
         {
             if (!optionsBuilder.IsConfigured)
             {
-
                 optionsBuilder.UseSqlServer("Server=tcp:estus.database.windows.net,1433;Initial Catalog=ashen;Persist Security Info=False;User ID=ctrlaltelite;Password=theyseeU2;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;");
             }
         }
@@ -76,6 +76,30 @@ namespace yourspace.Models
                     .HasConstraintName("AdminAccount_fk");
             });
 
+            modelBuilder.Entity<FriendRequest>(entity =>
+            {
+                entity.HasKey(e => new { e.SenderId, e.ReceiverId })
+                    .HasName("FriendRequest_pk");
+
+                entity.Property(e => e.SenderId).HasColumnName("SenderID");
+
+                entity.Property(e => e.ReceiverId).HasColumnName("ReceiverID");
+
+                entity.Property(e => e.DateSent).HasColumnType("date");
+
+                entity.HasOne(d => d.Receiver)
+                    .WithMany(p => p.FriendRequestReceiver)
+                    .HasForeignKey(d => d.ReceiverId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK__FriendReq__Recei__0A9D95DB");
+
+                entity.HasOne(d => d.Sender)
+                    .WithMany(p => p.FriendRequestSender)
+                    .HasForeignKey(d => d.SenderId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK__FriendReq__Sende__09A971A2");
+            });
+
             modelBuilder.Entity<Posts>(entity =>
             {
                 entity.HasKey(e => new { e.AccountId, e.PostTime })
@@ -104,14 +128,18 @@ namespace yourspace.Models
 
             modelBuilder.Entity<UserAccount>(entity =>
             {
+                
                 entity.HasKey(e => e.AccountId)
+                    
                     .HasName("UserAccount_pk");
 
                 entity.HasIndex(e => e.AccountId)
+                
                     .HasName("UQ__UserAcco__349DA5874C18D4EF")
                     .IsUnique();
 
                 entity.Property(e => e.AccountId)
+                    
                     .HasColumnName("AccountID")
                     .ValueGeneratedNever();
 
@@ -134,6 +162,8 @@ namespace yourspace.Models
                 entity.Property(e => e.PhoneNumber).HasMaxLength(15);
 
                 entity.Property(e => e.PhotoPath).HasMaxLength(100);
+
+                entity.Property(e => e.RelationStatus).HasMaxLength(30);
 
                 entity.Property(e => e.ULocation)
                     .HasColumnName("uLocation")

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
+using Newtonsoft.Json;
 using System.Web.Mvc;
 using yourspace.Models;
 
@@ -11,8 +11,10 @@ namespace yourspace.Controllers
     {
         public ashenContext db = new ashenContext();
         public UserAccount UserAccount;
-        
-        
+        public UserAccount thisUserAccount;
+
+
+
         public ActionResult Index(UserAccount userAccount)
         {
             Session["UserAccount"] = userAccount;
@@ -24,7 +26,11 @@ namespace yourspace.Controllers
             ViewBag.LastName = userAccount.LastName;
             ViewBag.Bio = userAccount.Biography;
             ViewBag.postList = db.Posts.Where(p => p.AccountId == userAccount.AccountId);
-            
+
+            //fillFriendsList(UserAccount);
+
+            this.fillFriendsList();
+
 
 
             return View();
@@ -58,6 +64,31 @@ namespace yourspace.Controllers
         public ActionResult EditProfile(LoginAccount logAcc)
         {
             return RedirectToAction("Index", "EditProfile", Session["UserAccount"]);
+        }
+
+
+        public void fillFriendsList()
+        {
+            //UserAccount = ((UserAccount)Session["UserAccount"]);
+
+            var allUsers = from user in db.UserAccount
+                           select user;
+
+            foreach(var user in allUsers)
+            {
+                UserAccount.friendsList.Add(user);
+            }
+
+            // Serialize object
+            string jsonString = JsonConvert.SerializeObject(UserAccount.friendsList);
+            
+            UserAccount.FriendsList = jsonString;
+
+
+            // Possible solution: https://www.pmichaels.net/tag/dbcontextoptionsbuilder-enablesensitivedatalogging/
+            db.UserAccount.Update(UserAccount);
+            db.SaveChanges();
+
         }
     }
 }
