@@ -96,15 +96,23 @@ namespace yourspace.Controllers
         [HttpPost]
         public ActionResult checkPicture(HttpPostedFileBase file)
         {
-            if (file != null )
+            if (file != null && file.ContentLength > 0)
             {
-                string path = Server.MapPath("~/Uploads/");
+                string path = Server.MapPath("~/Content/Images/userPhoto/");
                 if (!Directory.Exists(path))
                 {
                     Directory.CreateDirectory(path);
                 }
-                file.SaveAs(path + Path.GetFileName(file.FileName));
+                string photoFilePath = Path.Combine(path, Path.GetFileName(file.FileName));
+                ourPath = photoFilePath;
+                file.SaveAs(photoFilePath);
+                uAcc.PhotoPath = ourPath;
+
+                db.UserAccount.Add(uAcc);
+                db.SaveChanges();
                 ViewBag.Message = "File uploaded successfully";
+                
+                
                 
                 
                         //string path = Path.Combine(Server.MapPath("~/UserImages"), RandomString(30), Path.GetFileName(file.FileName));
