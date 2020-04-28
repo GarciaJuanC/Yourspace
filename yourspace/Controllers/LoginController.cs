@@ -12,6 +12,8 @@ namespace yourspace.Controllers
     public class LoginController : Controller
     {
         public ashenContext db = new ashenContext();
+        
+
         // GET: Login
         public ActionResult Index()
         {
