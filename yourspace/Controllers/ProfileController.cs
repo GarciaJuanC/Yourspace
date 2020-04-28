@@ -4,6 +4,7 @@ using System.Linq;
 using Newtonsoft.Json;
 using System.Web.Mvc;
 using yourspace.Models;
+using System.Data.Entity;
 
 namespace yourspace.Controllers
 {
@@ -11,7 +12,6 @@ namespace yourspace.Controllers
     {
         public ashenContext db = new ashenContext();
         public UserAccount UserAccount;
-        public UserAccount thisUserAccount;
 
 
 
@@ -21,7 +21,7 @@ namespace yourspace.Controllers
             UserAccount = (UserAccount) Session["UserAccount"];
             IList<Posts> postList = new List<Posts>();
             // Query String for debugging
-            //userAccount = db.UserAccount.Where(s => s.FirstName == "J").FirstOrDefault();
+            
             ViewBag.FirstName = userAccount.FirstName;
             ViewBag.LastName = userAccount.LastName;
             ViewBag.Bio = userAccount.Biography;
@@ -34,6 +34,38 @@ namespace yourspace.Controllers
 
 
             return View();
+        }
+
+        public void fillFriendsList()
+        {
+            UserAccount userAccount = db.UserAccount.AsNoTracking().Where(uA => uA.AccountId == UserAccount.AccountId).FirstOrDefault();
+
+            var allUsers = from user in db.UserAccount
+                           select user;
+
+            foreach (var user in allUsers)
+            {
+                userAccount.friendsList.Add(user.AccountId);
+            }
+
+            // Serialize object
+
+            // This prevents the error I was getting about tracking PK's!
+            // SOURCE: https://stackoverflow.com/questions/13510204/json-net-self-referencing-loop-detected
+
+            string jsonString = JsonConvert.SerializeObject(userAccount.friendsList, Formatting.None,
+                        new JsonSerializerSettings()
+                        {
+                            ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+                        });
+
+            userAccount.FriendsList = jsonString;
+
+            
+            // Possible solution: https://www.pmichaels.net/tag/dbcontextoptionsbuilder-enablesensitivedatalogging/
+            db.Update(userAccount); // ALSO changed this to not be db.UserAccount.Update... maybe this fixed the problem???
+            db.SaveChanges();
+
         }
 
         [HttpPost]
@@ -64,31 +96,6 @@ namespace yourspace.Controllers
         public ActionResult EditProfile(LoginAccount logAcc)
         {
             return RedirectToAction("Index", "EditProfile", Session["UserAccount"]);
-        }
-
-
-        public void fillFriendsList()
-        {
-            //UserAccount = ((UserAccount)Session["UserAccount"]);
-
-            var allUsers = from user in db.UserAccount
-                           select user;
-
-            foreach(var user in allUsers)
-            {
-                UserAccount.friendsList.Add(user);
-            }
-
-            // Serialize object
-            string jsonString = JsonConvert.SerializeObject(UserAccount.friendsList);
-            
-            UserAccount.FriendsList = jsonString;
-
-
-            // Possible solution: https://www.pmichaels.net/tag/dbcontextoptionsbuilder-enablesensitivedatalogging/
-            db.UserAccount.Update(UserAccount);
-            db.SaveChanges();
-
         }
     }
 }
