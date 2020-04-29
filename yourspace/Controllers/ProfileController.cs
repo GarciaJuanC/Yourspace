@@ -84,9 +84,16 @@ namespace yourspace.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult EditProfile(LoginAccount logAcc)
+        public ActionResult EditProfile()
         {
             return RedirectToAction("Index", "EditProfile", Session["UserAccount"]);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult UserHomePage()
+        {
+            return RedirectToAction("Index", "UserHomePage", Session["UserAccount"]);
         }
     }
 }
