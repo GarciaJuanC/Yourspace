@@ -31,42 +31,25 @@
 
 
             <ul>
-
-
                 <img src="~/Content/Images/userPhoto/jonah.jpg" alt="Smiley face" height="200" width="263">
                 <br />
-                <li>
-                    <font color="black">
-                        <label>Biography: </label><br /> @ViewBag.Bio
-                    </font>
-                </li>
-
             </ul>
-
+            <br />
             <div>
-                @using (Html.BeginForm("EditProfile", "Profile", FormMethod.Post))
+                @using (Html.BeginForm("ProfilePage", "UserHomePage", FormMethod.Post))
                 {
                     @Html.AntiForgeryToken()
                     @Html.ValidationSummary(true)
 
-                    <input class="btn btn-default" type="submit" value="Edit Profile" />
+                    <input class="btn btn-default" type="submit" value="Go to Profile Page" />
                 }
-                @using (Html.BeginForm("UserHomePage", "Profile", FormMethod.Post))
-                {
-                    @Html.AntiForgeryToken()
-                    @Html.ValidationSummary(true)
-
-                    <input class="btn btn-default" type="submit" value="Go to Home Page" />
-                }
-
-
             </div>
 
 
         </div>
 
         <div class="col-2">
-            <h1>@ViewBag.FirstName @ViewBag.LastName</h1> <!-- ViewBag.FirstName ViewBag.LastName-->
+            <h1>@ViewBag.friendCount friends say hello!</h1> <!-- ViewBag.FirstName ViewBag.LastName-->
             <br />
 
             @using (Html.BeginForm("UserPost", "Profile", FormMethod.Post))

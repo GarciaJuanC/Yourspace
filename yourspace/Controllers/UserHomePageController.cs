@@ -14,6 +14,7 @@ namespace yourspace.Controllers
         public ashenContext db = new ashenContext();
         UserAccount thisUserAccount;
         UserAccount friendAccount;
+        int friendCount = 0;
 
         public ActionResult Index(UserAccount userAccount)
         {
@@ -27,13 +28,10 @@ namespace yourspace.Controllers
             thisUserAccount.friendsList = JsonConvert.DeserializeObject<List<int>>(thisUserAccount.FriendsList);
 
 
+            // Populate friendsListPosts
             foreach (int friendID in thisUserAccount.friendsList)
             {
-
-                /*var allUsers = from user in db.UserAccount
-                               where user.AccountId != UserAccount.AccountId
-                               select user;*/
-
+                friendCount++;
                 var friendPosts = from post in db.Posts
                                  where post.AccountId == friendID
                                  select post;
@@ -45,20 +43,21 @@ namespace yourspace.Controllers
 
 
                 ViewBag.friendsPostList = friendsPostList;
+                
             }
-
-            
+            ViewBag.friendCount = friendCount;
 
             return View();
-
-            /* Session["UserAccount"] = userAccount;
-             thisUserAccount = (UserAccount)Session["UserAccount"];
-             ViewBag.FirstName = userAccount.FirstName;
-             ViewBag.LastName = userAccount.LastName;
-             ViewBag.Bio = userAccount.Biography;
-             ViewBag.PhoneNum = userAccount.PhoneNumber;*/
-
-
         }
+
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult ProfilePage()
+        {
+            return RedirectToAction("Index", "Profile", Session["UserAccount"]);
+        }
+
+
     }
 }
