@@ -27,7 +27,7 @@ namespace yourspace.Controllers
             ViewBag.Bio = userAccount.Biography;
             ViewBag.postList = db.Posts.Where(p => p.AccountId == userAccount.AccountId);
 
-            this.fillFriendsList();
+            //this.fillFriendsList();
 
 
 
