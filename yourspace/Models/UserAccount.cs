@@ -25,6 +25,7 @@ namespace yourspace.Models
 
         public virtual Account Account { get; set; }
         public virtual ICollection<Posts> Posts { get; set; }
+        public Boolean hasFriends = false;
 
 
         public List<int> friendsList = new List<int>(); // For storing serialized objects

@@ -15,6 +15,7 @@ namespace yourspace.Controllers
         UserAccount thisUserAccount;
         UserAccount friendAccount;
         int friendCount = 0;
+        
 
         public ActionResult Index(UserAccount userAccount)
         {
@@ -25,7 +26,13 @@ namespace yourspace.Controllers
             // Elements for the view
             ViewBag.FirstName = userAccount.FirstName;
             ViewBag.LastName = userAccount.LastName;
-            thisUserAccount.friendsList = JsonConvert.DeserializeObject<List<int>>(thisUserAccount.FriendsList);
+
+            if(thisUserAccount.FriendsList != null)
+            {
+                thisUserAccount.friendsList = JsonConvert.DeserializeObject<List<int>>(thisUserAccount.FriendsList);
+                thisUserAccount.hasFriends = true;
+            }
+            
 
 
             // Populate friendsListPosts

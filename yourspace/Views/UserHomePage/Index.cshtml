@@ -1,4 +1,5 @@
 ﻿@model yourspace.Models.SignUp
+
 <!DOCTYPE html>
 
 <html lang="en">
@@ -69,10 +70,14 @@
             }
             <br />
             <ul>
-                @foreach (var post in ViewBag.friendsPostList)
+                @if (ViewBag.friendsPostList != null)
                 {
-                    <li>@post.TextPost <br /><br /><p align="right"><b>Post Time:</b>@post.PostTime</p></li>
+                    foreach (var post in ViewBag.friendsPostList)
+                    {
+                        <li>@post.TextPost <br /><br /><p align="right"><b>Post Time:</b>@post.PostTime</p></li>
+                    }
                 }
+
             </ul>
         </div>
     </div>
