@@ -29,7 +29,7 @@ namespace yourspace.Controllers
             {
                 if (_acc.HashedPass == getMD5(logAcc.Password + _acc.SaltValue))
                 {
-                    return RedirectToAction("Index", "Home", db.UserAccount.Where(s => s.AccountId == _acc.AccountId).FirstOrDefault());
+                    return RedirectToAction("Index", "UserHomePage", db.UserAccount.Where(s => s.AccountId == _acc.AccountId).FirstOrDefault());
                 }
                 else
                 {
