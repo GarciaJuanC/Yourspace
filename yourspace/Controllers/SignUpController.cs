@@ -9,11 +9,11 @@ using System.Text;
 using System.IO;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
-using System.Web.UI.WebControls;
+using System.Drawing;
 
 namespace yourspace.Controllers
 {
-    
+
     public class SignUpController : Controller
     {
         public ashenContext db = new ashenContext();
@@ -56,7 +56,7 @@ namespace yourspace.Controllers
             catch (Exception ex)
             {
                 ModelState.AddModelError("Email", "Email has already been registered!");
-                return View("Index",signup);
+                return View("Index", signup);
             }
         }
 
@@ -94,41 +94,66 @@ namespace yourspace.Controllers
             return View();
         }
 
+        [HttpGet]
+        public ActionResult Add()
+        {
+            return View();
+        }
 
+        [HttpPost]
+        public ActionResult Add(UserAccount image)
+        {
+            string fileName = Path.GetFileNameWithoutExtension(image.PhotoFile.FileName);
+            string extension = Path.GetExtension(image.PhotoFile.FileName);
+            fileName = fileName + DateTime.Now.ToString("yymmssfff") + extension;
+            image.PhotoPath = "~/UserPics/" + fileName;
+            fileName = Path.Combine(Server.MapPath("~/UploadedPics/"), fileName);
+            image.PhotoFile.SaveAs(fileName);
+            //using (ashenContext db = new ashenContext())
+            //{
+            db.UserAccount.Add(image); //!!!look at 18:10 ... hers is named images
+            db.SaveChanges();
+            //}
+            ModelState.Clear();
+            return View();
+        }
+
+        [HttpGet]
+        public ActionResult View(int id)
+        {
+            UserAccount image = new UserAccount();
+            using (ashenContext db = new ashenContext())
+            {
+                image = db.UserAccount.Where(x => x.AccountId == id).FirstOrDefault();
+            }
+            return RedirectToAction("Index", "Profile", image);
+
+        }
 
         [HttpPost]
         public ActionResult checkPicture(HttpPostedFileBase file)
         {
-            if (file != null && file.ContentLength > 0)
+            if (file != null)
             {
-                string path = Server.MapPath("~/Content/Images/userPhoto/");
+                string path = Server.MapPath("~/Uploads/");
                 if (!Directory.Exists(path))
                 {
                     Directory.CreateDirectory(path);
                 }
-                string photoFilePath = Path.Combine(path, Path.GetFileName(file.FileName));
-                ourPath = photoFilePath;
-                file.SaveAs(photoFilePath);
-                uAcc.PhotoPath = ourPath;
-
-                //db.UserAccount.Add(uAcc);
-                db.UserAccount.Update(uAcc);
-                db.SaveChanges();
+                file.SaveAs(path + Path.GetFileName(file.FileName));
                 ViewBag.Message = "File uploaded successfully";
-                
-                
-                
-                
-                        //string path = Path.Combine(Server.MapPath("~/UserImages"), RandomString(30), Path.GetFileName(file.FileName));
-                        //file.SaveAs(path); 
-                        //uAcc.PhotoPath = path;
 
-                        //db.UserAccount.Update(uAcc);
-                        //db.SaveChanges();
-                    }
-                    //ViewBag.FileStatus = "File uploaded successfully.";
-                
-            
+
+                //string path = Path.Combine(Server.MapPath("~/UserImages"), RandomString(30), Path.GetFileName(file.FileName));
+                //file.SaveAs(path);
+                //uAcc.PhotoPath = path;
+
+                //db.UserAccount.Update(uAcc);
+                //db.SaveChanges();
+            }
+            //ViewBag.FileStatus = "File uploaded successfully.";
+
+
             return RedirectToAction("Index", "Home");
         }
 

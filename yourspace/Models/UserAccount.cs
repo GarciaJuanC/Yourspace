@@ -1,5 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Web;
+using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace yourspace.Models
 {
@@ -16,10 +20,11 @@ namespace yourspace.Models
         public string LastName { get; set; }
         public DateTime? DateOfBirth { get; set; }
         public string PhoneNumber { get; set; }
+
         public string PhotoPath { get; set; }
 
-        public HttpPostedFile ImageFile { get; set; }
-
+        [NotMapped]
+        public HttpPostedFileBase PhotoFile { get; set; }
         public string Biography { get; set; }
         public string ULocation { get; set; }
         public string Occupation { get; set; }
@@ -32,5 +37,7 @@ namespace yourspace.Models
 
 
         public List<int> friendsList = new List<int>(); // For storing serialized objects
+
     }
+
 }
