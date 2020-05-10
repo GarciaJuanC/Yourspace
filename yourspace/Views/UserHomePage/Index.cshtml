@@ -7,82 +7,139 @@
 
 <head>
     <title>Profile Page</title> <!--The <title> tag is required in all HTML documents and it defines the title of the document.-->
-    <link type="text/css" rel="stylesheet" href="~/Content/Profile.css" />
+    <link type="text/css" rel="stylesheet" href="~/Content/UserHomePage.css" />
     <script src="https://use.fontawesome.com/57fc7ac65d.js"></script>
 </head>
+
+
 <body>
-    <div class="header">
-        <h2>Yourspace</h2>
 
-    </div>
+    <div>
+        @using (Html.BeginForm("ProfilePage", "UserHomePage", FormMethod.Post))
+        {
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(true)
 
-    <div class="SearchWrap">
-        <div class="search">
-            <input type="text" class="searchTerm" placeholder="Search Yourspace">
-            <button type="submit" class="searchButton">
-                <i class="fa fa-search"></i>
-            </button>
-        </div>
+            <input class="btn btn-default" type="submit" value="Go to Profile Page" />
+        }
     </div>
 
 
-    <div class="row">
+    <div class="col-2">
+        <h1>@ViewBag.friendCount friends say hello!</h1> <!-- ViewBag.FirstName ViewBag.LastName-->
+        <br />
 
-        <div class="col-1">
-
-
-            <ul>
-                <img src="~/Content/Images/userPhoto/jonah.jpg" alt="Smiley face" height="200" width="263">
-                <br />
-            </ul>
-            <br />
-            <div>
-                @using (Html.BeginForm("ProfilePage", "UserHomePage", FormMethod.Post))
-                {
-                    @Html.AntiForgeryToken()
-                    @Html.ValidationSummary(true)
-
-                    <input class="btn btn-default" type="submit" value="Go to Profile Page" />
-                }
-            </div>
-
-
-        </div>
-
-        <div class="col-2">
-            <h1>@ViewBag.friendCount friends say hello!</h1> <!-- ViewBag.FirstName ViewBag.LastName-->
-            <br />
-
-            @using (Html.BeginForm("UserPost", "Profile", FormMethod.Post))
+        <br />
+        <ul>
+            @if (ViewBag.friendsPostList != null)
             {
-                @Html.AntiForgeryToken()
-                @Html.ValidationSummary(true)
-
-
-
-                <div>
-
-                    @Html.EditorFor(model => model.UserPost, new { htmlAttributes = new { @class = "form-control", placeholder = "Tell the world what's good!" } })
-                    @Html.ValidationMessageFor(model => model.UserPost)
-                    <input class="btn btn-default" type="submit" value="Create" />
-                </div>
-
-            }
-            <br />
-            <ul>
-                @if (ViewBag.friendsPostList != null)
+                foreach (var post in ViewBag.friendsPostList)
                 {
-                    foreach (var post in ViewBag.friendsPostList)
-                    {
-                        <li>@post.TextPost <br /><br /><p align="right"><b>Post Time:</b>@post.PostTime</p></li>
-                    }
+                    <li>@post.TextPost <br /><br /><p align="right"><b>Post Time:</b>@post.PostTime</p></li>
                 }
+            }
 
-            </ul>
-        </div>
+        </ul>
     </div>
+
+    <div>
+        <h3>Juan Garcia</h3>
+        <p>
+            Today was so hot!! ...I think I want to get into writing...or maybe song writing.
+            Ya'll wanna hear a poem written from moi????
+        </p>
+        <p>
+            "Roses are red, violets are blue. Monkeys like you should be kept in a zoo. Don't feel angry you will find me there too.
+            Not in a cage but laughing at you."
+        </p>
+        <p>April 4, 2020 [11:30PM]</p>
+    </div>
+    <div>
+        <h3>Juan Garcia</h3>
+        <p>My new PC came in today. Excited to start building it!</p>
+        <p>I WILL BE STARTING A YOUTUBE WHERE I BUILD PCS FOR FRIENDS AND DESTROY THEM IN THE END</p>
+        <p>LINK IN BIO!!!</p>
+        <p>April 15, 2020 [1:02PM] </p>
+    </div>
+    <div>
+        <h3 class="pink">Dan Flores</h3>
+        <p>
+            I still can't believe bernie dropped out :( He was like giving us some hope that people still cared about us.
+            I won't go on a rant but I am truly upset. I think I want to move to Canada or something now.
+            Start my own country...Anyone wanna come with??? I was thinking I would like to be somewhere with a lot of nature. Peaceful.
+            I can see how my outfits would match their too because I own a lot of plaid. I can be a lumberjack or something.
+        </p>
+        <p>April 15, 2020 [1:15PM]</p>
+    </div>
+    <div>
+        <h3 class="pink">Joce Espitia</h3>
+        <p>
+            I need a vacation from being stuck at home in this quarantine!! Get. Me. Out!!!!! I guess one good thing about being stuck inside is that I haven't gotten an uneven tan as just yet. I go out and sunbathe when I can because I want to get a nice golden EVEN tan.
+            One bad thing about that tho is that the sun drains my energy.
+        </p>
+        <p>April 16, 2020 [2:00PM]</p>
+    </div>
+
+    <div>
+        <h3>Jocelyn Espitia</h3>
+        <p>Today was a productive day. Did at least ONE thing heheh. I tried making japanese pancakes and oh no bbygirl...they came out horrible...rip</p>
+        <p>April 16, 2020 [11:12PM]</p>
+    </div>
+    <div>
+        <h3 class="pink">Juan Garcia</h3>
+        <p>Been getting back into GTA.... getting bored of it now...any reccomends?</p>
+        <p>April 16, 2020 [11:14PM]</p>
+    </div>
+    <div>
+        <h3>Dan Flores</h3>
+        <p>
+            Today seems like a good day to do nothing. My sleep schedule has been so off lately because of quarantine. I am more of a night owl than a early bird.
+            I feel like I thrive better and my prime time is 1am to 4am.
+        </p>
+        <p>April 16, 2020 [11:30PM]</p>
+    </div>
+
+
+    <div>
+        <h3>Dan Flores</h3>
+        <p>I got the shudder subscription and I have been binge watching so many movies. Horror movies are DOPE AF</p>
+        <p>April 20, 2020 [11:30AM]</p>
+    </div>
+
+    <div>
+        <h3>Joce Espitia</h3>
+        <p>
+            I can't believe desi is pregnant!!!! She vlogged her fertility journey and I had a hunch that the last episode was going to be her pregnant but I wasn't sure... but omgggg!!!
+            She just posted that her baby is due in October 2020... hopefully the baby is a scorpio like me. Ahaha.
+        </p>
+        <p>May 1, 2020 [12:00PM]</p>
+    </div>
+    <div>
+        <h3>Joce Espitia</h3>
+        <p>
+            wow. this semester went by sooo fast. can't believe we're graduating now... into a recession. JUST GREAT. AND we don't even get a graduation ceremony.
+            I remember back in March I hoped we would go into quarantine cuz I didn't wanna go to school for like 3 weeks but I didn't think we would never get to go back :(
+        </p>
+        <p>May 2, 2020 [1:34AM]</p>
+    </div>
+    <div>
+        <h3>Juan Garcia</h3>
+        <p>Do I really need a hair cut? Is it worth risking my lungs to be possibly exposed to corona? </p>
+        <p>May 2, 2020 [1:36AM]</p>
+    </div>
+    <div>
+        <h3>Dan Flores</h3>
+        <p>I want to try the dalgona coffee. Is it up to the hype? I'm not much of a coffee person but since it has instant coffee..it shouldn't be that strong right?</p>
+        <p>May 3, 2020 [1:34PM]</p>
+    </div>
+
 </body>
 
 </html>
+
+@section Scripts{
+    <script src="~/Scripts/uploadData.js"></script>
+}
+
 
 
