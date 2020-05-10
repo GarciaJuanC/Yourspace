@@ -9,6 +9,7 @@ using System.Text;
 using System.IO;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
+using System.Web.UI.WebControls;
 
 namespace yourspace.Controllers
 {
@@ -93,6 +94,8 @@ namespace yourspace.Controllers
             return View();
         }
 
+
+
         [HttpPost]
         public ActionResult checkPicture(HttpPostedFileBase file)
         {
@@ -108,7 +111,8 @@ namespace yourspace.Controllers
                 file.SaveAs(photoFilePath);
                 uAcc.PhotoPath = ourPath;
 
-                db.UserAccount.Add(uAcc);
+                //db.UserAccount.Add(uAcc);
+                db.UserAccount.Update(uAcc);
                 db.SaveChanges();
                 ViewBag.Message = "File uploaded successfully";
                 
@@ -116,7 +120,7 @@ namespace yourspace.Controllers
                 
                 
                         //string path = Path.Combine(Server.MapPath("~/UserImages"), RandomString(30), Path.GetFileName(file.FileName));
-                        //file.SaveAs(path);
+                        //file.SaveAs(path); 
                         //uAcc.PhotoPath = path;
 
                         //db.UserAccount.Update(uAcc);

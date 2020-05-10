@@ -22,7 +22,7 @@ namespace yourspace.Models
 
         public string PhotoPath { get; set; }
 
-        //public HttpPostedFile ImageFile { get; set; }
+        public HttpPostedFile ImageFile { get; set; }
         public string Biography { get; set; }
         public string ULocation { get; set; }
         public string Occupation { get; set; }

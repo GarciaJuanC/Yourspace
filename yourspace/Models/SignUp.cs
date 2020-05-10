@@ -41,5 +41,9 @@ namespace yourspace.Models
         [Required(AllowEmptyStrings = false)]
         public string UserPost { get; set; }
 
+        [Display(Name = "Photo Path")]
+        [Required(AllowEmptyStrings = true)]
+        public string pp { get; set; }
+
     }
 }
