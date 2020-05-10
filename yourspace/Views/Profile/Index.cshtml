@@ -52,6 +52,13 @@
 
                     <input class="btn btn-default" type="submit" value="Edit Profile" />
                 }
+                @using (Html.BeginForm("UserHomePage", "Profile", FormMethod.Post))
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.ValidationSummary(true)
+
+                    <input class="btn btn-default" type="submit" value="Go to Home Page" />
+                }
 
 
             </div>
@@ -60,7 +67,7 @@
         </div>
 
         <div class="col-2">
-            <h1 style="margin-left: 60px;" id="user_name">@ViewBag.FirstName @ViewBag.LastName</h1>
+            <h1>@ViewBag.FirstName @ViewBag.LastName</h1> <!-- ViewBag.FirstName ViewBag.LastName-->
             <br />
 
             @using (Html.BeginForm("UserPost", "Profile", FormMethod.Post))
@@ -78,13 +85,7 @@
                 </div>
 
             }
-
-            <!--<form action="/action_page.php">
-                 Manual spacing for userPost
-                <input type="text" id="user_post" style="margin-left: 40px;" placeholder="Tell the world what's good!" />
-            </form>
-            <br /> -->
-            <!-- Display user's posts from the database-->
+            <br />
             <ul>
                 @foreach (var post in ViewBag.postList)
                 {

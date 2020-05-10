@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
+using Newtonsoft.Json;
 using System.Web.Mvc;
 using yourspace.Models;
+using System.Data.Entity;
 
 namespace yourspace.Controllers
 {
@@ -11,24 +12,52 @@ namespace yourspace.Controllers
     {
         public ashenContext db = new ashenContext();
         public UserAccount UserAccount;
-        
-        
+
+
+
         public ActionResult Index(UserAccount userAccount)
         {
             Session["UserAccount"] = userAccount;
             UserAccount = (UserAccount) Session["UserAccount"];
             IList<Posts> postList = new List<Posts>();
-            // Query String for debugging
-            //userAccount = db.UserAccount.Where(s => s.FirstName == "J").FirstOrDefault();
+           
+            // Elements for the view
             ViewBag.FirstName = userAccount.FirstName;
             ViewBag.LastName = userAccount.LastName;
             ViewBag.Bio = userAccount.Biography;
             ViewBag.postList = db.Posts.Where(p => p.AccountId == userAccount.AccountId);
-            
+
+            //this.fillFriendsList();
+
 
 
             return View();
         }
+
+        public void fillFriendsList()
+        {
+            // Query Syntax
+            // ERROR: Caused a tracking Error with PK's of UserAccount (AccountID), where clause fixed this
+            var allUsers = from user in db.UserAccount
+                           where user.AccountId != UserAccount.AccountId
+                           select user;
+
+
+            foreach (var user in allUsers)
+            {
+                UserAccount.friendsList.Add(user.AccountId);
+            }
+
+
+            string jsonString = JsonConvert.SerializeObject(UserAccount.friendsList);
+            UserAccount.FriendsList = jsonString;
+            UserAccount.friendsList = JsonConvert.DeserializeObject<List<int>>(jsonString);
+
+
+            db.Update(UserAccount); 
+            db.SaveChanges();
+        }
+
 
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -55,9 +84,16 @@ namespace yourspace.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult EditProfile(LoginAccount logAcc)
+        public ActionResult EditProfile()
         {
             return RedirectToAction("Index", "EditProfile", Session["UserAccount"]);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult UserHomePage()
+        {
+            return RedirectToAction("Index", "UserHomePage", Session["UserAccount"]);
         }
     }
 }

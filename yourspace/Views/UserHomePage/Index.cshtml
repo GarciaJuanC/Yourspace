@@ -1,0 +1,88 @@
+﻿@model yourspace.Models.SignUp
+
+<!DOCTYPE html>
+
+<html lang="en">
+
+
+<head>
+    <title>Profile Page</title> <!--The <title> tag is required in all HTML documents and it defines the title of the document.-->
+    <link type="text/css" rel="stylesheet" href="~/Content/Profile.css" />
+    <script src="https://use.fontawesome.com/57fc7ac65d.js"></script>
+</head>
+<body>
+    <div class="header">
+        <h2>Yourspace</h2>
+
+    </div>
+
+    <div class="SearchWrap">
+        <div class="search">
+            <input type="text" class="searchTerm" placeholder="Search Yourspace">
+            <button type="submit" class="searchButton">
+                <i class="fa fa-search"></i>
+            </button>
+        </div>
+    </div>
+
+
+    <div class="row">
+
+        <div class="col-1">
+
+
+            <ul>
+                <img src="~/Content/Images/userPhoto/jonah.jpg" alt="Smiley face" height="200" width="263">
+                <br />
+            </ul>
+            <br />
+            <div>
+                @using (Html.BeginForm("ProfilePage", "UserHomePage", FormMethod.Post))
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.ValidationSummary(true)
+
+                    <input class="btn btn-default" type="submit" value="Go to Profile Page" />
+                }
+            </div>
+
+
+        </div>
+
+        <div class="col-2">
+            <h1>@ViewBag.friendCount friends say hello!</h1> <!-- ViewBag.FirstName ViewBag.LastName-->
+            <br />
+
+            @using (Html.BeginForm("UserPost", "Profile", FormMethod.Post))
+            {
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary(true)
+
+
+
+                <div>
+
+                    @Html.EditorFor(model => model.UserPost, new { htmlAttributes = new { @class = "form-control", placeholder = "Tell the world what's good!" } })
+                    @Html.ValidationMessageFor(model => model.UserPost)
+                    <input class="btn btn-default" type="submit" value="Create" />
+                </div>
+
+            }
+            <br />
+            <ul>
+                @if (ViewBag.friendsPostList != null)
+                {
+                    foreach (var post in ViewBag.friendsPostList)
+                    {
+                        <li>@post.TextPost <br /><br /><p align="right"><b>Post Time:</b>@post.PostTime</p></li>
+                    }
+                }
+
+            </ul>
+        </div>
+    </div>
+</body>
+
+</html>
+
+

@@ -224,6 +224,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\SignUpController.cs" />
+    <Compile Include="Controllers\UserHomePageController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -233,6 +234,7 @@
     <Compile Include="Models\ashenContext.cs" />
     <Compile Include="Models\EditProfile.cs" />
     <Compile Include="Models\FriendList.cs" />
+    <Compile Include="Models\FriendRequest.cs" />
     <Compile Include="Models\LoginAccount.cs" />
     <Compile Include="Models\Posts.cs" />
     <Compile Include="Models\SignUp.cs" />
@@ -245,6 +247,7 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\UserHomePage.css" />
     <Content Include="Content\Profile.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -283,6 +286,9 @@
     <Content Include="Views\Profile\_ViewStart.cshtml" />
     <Content Include="Views\Shared\_LayoutProfile.cshtml" />
     <Content Include="Views\EditProfile\Index.cshtml" />
+    <Content Include="Views\UserHomePage\Index.cshtml" />
+    <Content Include="Views\UserHomePage\_ViewStart.cshtml" />
+    <Content Include="Views\Shared\_LayoutUserHomePage.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

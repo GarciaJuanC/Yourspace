@@ -23,6 +23,8 @@
     <div class="container">
         <section id="content">
             <hr />
+            <br />
+            <br />
             <div>
                 @using (Html.BeginForm("Update", "EditProfile", FormMethod.Post))
                 {
@@ -46,7 +48,7 @@
                         @Html.ValidationMessageFor(model => model.phoneNum)
                     </div>
 
-                    <input class="btn btn-default" type="submit" value="Create" />
+                    <input class="btn btn-default" type="submit" value="Update" />
                 }
             </div>
 

@@ -1,0 +1,7 @@
+Per Dr. Garcia,
+
+Open Package Manager Console (PMC)
+
+Run the command:
+
+Scaffold-DbContext "Server=tcp:estus.database.windows.net,1433;Initial Catalog=ashen;Persist Security Info=False;User ID=ctrlaltelite;Password=theyseeU2;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;" Microsoft.EntityFrameworkCore.SqlServer -OutputDir Models -FORCE
