@@ -46,6 +46,7 @@ namespace yourspace.Controllers
                 uAcc.LastName = signup.lName;
                 uAcc.DateOfBirth = signup.dob;
                 uAcc.PhoneNumber = signup.phoneNum;
+                Session["UserAccount"] = uAcc;
 
                 db.UserAccount.Add(uAcc);
                 db.SaveChanges();
@@ -117,7 +118,7 @@ namespace yourspace.Controllers
                     //ViewBag.FileStatus = "File uploaded successfully.";
                 
             
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Index", "Profile", Session["UserAccount"]);
         }
 
     }
